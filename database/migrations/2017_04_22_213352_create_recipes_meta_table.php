@@ -17,8 +17,8 @@ class CreateRecipesMetaTable extends Migration
             $table->increments('id');
             $table->integer('recipe_id')->unsigned()->index();
             $table->integer('ingredient_id')->unsigned()->index();
-            $table->foreign('recipe_id')->references('id')->on('recipes');
-            $table->foreign('ingredient_id')->references('id')->on('recipes');
+            $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
+            $table->foreign('ingredient_id')->references('id')->on('recipes')->onDelete('cascade');
             $table->integer('quantity');
             $table->string('unit');
             $table->string('detail')->nullable();

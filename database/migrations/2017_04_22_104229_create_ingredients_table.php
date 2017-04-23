@@ -17,7 +17,7 @@ class CreateIngredientsTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->text('description');
-            $table->double('calories', 3, 2)->nullable();
+            $table->double('calories', 4, 2)->nullable();
             $table->double('proteins', 3, 2)->nullable();
             $table->double('carbohydrates', 3, 2)->nullable();
             $table->double('fats', 3, 2)->nullable();
