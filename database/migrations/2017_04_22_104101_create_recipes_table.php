@@ -18,6 +18,7 @@ class CreateRecipesTable extends Migration
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('name');
+            $table->string('image')->nullable();
             $table->text('description');
             $table->integer('time');
             $table->integer('difficulty');

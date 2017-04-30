@@ -13,7 +13,7 @@ class CreateRecipesMetaTable extends Migration
      */
     public function up()
     {
-        Schema::create('recipes_meta', function (Blueprint $table) {
+        Schema::create('recipe_meta', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('recipe_id')->unsigned()->index();
             $table->integer('ingredient_id')->unsigned()->index();
@@ -33,6 +33,6 @@ class CreateRecipesMetaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recipes_meta');
+        Schema::dropIfExists('recipe_meta');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Recipe;
 use App\Models\RecipesMeta;
+use App\Models\Misc\IngredientMeta;
 
 class Ingredient extends Model
 {
@@ -27,5 +28,15 @@ class Ingredient extends Model
     public function recipes()
     {
         return $this->belongsToMany(RecipesMeta::class);
+    }
+
+    /**
+     * Returns the meta information associated with this ingredient.
+     *
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function meta()
+    {
+        return $this->hasMany(IngredientMeta::class);
     }
 }

@@ -11,7 +11,7 @@ class EventRecipe extends Model
     /**
      * Return the recipe associated with this instance.
      *
-     * @return App\Models\Recipe
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public function recipe() {
         return $this->belongsTo(Recipe::class);
@@ -20,7 +20,7 @@ class EventRecipe extends Model
     /**
      * Return the recipe that this event_recipe belongs to.
      *
-     * @return App\Models\Recipe
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public function event() {
         return $this->belongsTo(Event::class);

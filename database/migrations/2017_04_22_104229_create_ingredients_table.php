@@ -16,11 +16,9 @@ class CreateIngredientsTable extends Migration
         Schema::create('ingredients', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
+            $table->string('image')->nullable();
             $table->text('description');
-            $table->double('calories', 4, 2)->nullable();
-            $table->double('proteins', 3, 2)->nullable();
-            $table->double('carbohydrates', 3, 2)->nullable();
-            $table->double('fats', 3, 2)->nullable();
+            $table->string('unit');
             $table->integer('class');
             $table->timestamps();
         });
