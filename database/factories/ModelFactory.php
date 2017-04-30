@@ -51,3 +51,19 @@ $factory->define(App\Models\Misc\EventRecipe::class, function (Faker\Generator $
         'event_id' => $faker->numberBetween(1, 50)
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Ingredient::class, function (Faker\Generator $faker) {
+
+    return [
+        'description' => $faker->paragraph(1),
+        'unit' => 'grame',
+        'class' => 2
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Misc\IngredientMeta::class, function (Faker\Generator $faker) {
+
+    return [];
+});

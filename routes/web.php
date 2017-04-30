@@ -32,3 +32,4 @@ Route::group(['prefix' => 'image/'], function() {
 Route::group(['prefix' => 'ajax/'], function() {
     Route::get('searchHints/{word}', 'AjaxController@searchHints');
 });
+
