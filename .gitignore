@@ -5,6 +5,7 @@
 /vendor
 /.idea
 /.vagrant
+tags
 Homestead.json
 Homestead.yaml
 .env

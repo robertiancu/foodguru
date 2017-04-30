@@ -17,4 +17,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::group(['prefix' => 'view/'], function() {
+    Route::get('home', 'HomeController@index');
+
+    Route::get('recipes', 'RecipeController@list');
+    Route::get('recipe/{id}', 'RecipeController@show');
+});
+
+Route::group(['prefix' => 'image/'], function() {
+    Route::get('base/{img}', 'ImageController@baseImage');
+});
+
 Route::get('/home', 'HomeController@index');
