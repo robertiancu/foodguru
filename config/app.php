@@ -179,8 +179,17 @@ return [
 
         /*
          * Image processing
+         *
+         * @author Horea Chivu
          */
         Intervention\Image\ImageServiceProvider::class,
+
+        /*
+         * Fuzzy search in Laravel
+         *
+         * @author Horea Chivu
+         */
+        TomLingham\Searchy\SearchyServiceProvider::class,
     ],
 
     /*
@@ -230,6 +239,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Searchy' => TomLingham\Searchy\Facades\Searchy::class,
     ],
 
 ];

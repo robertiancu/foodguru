@@ -10,17 +10,27 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+$logo-text-color: white;
+$sidebar-background-color: #f5f5f5;
+$sidebar-left-border-color: #FF3B3F;
+$active-background-color: #D2D2A2;
+
 #main-logo {
     font-family: 'Plaster', cursive;
-    color: white;
+    color: $logo-text-color;
     font-size: 2em;
 }
 
-.sidebar {
-    background-color: #f5f5f5;
+#sidebar {
+    background-color: $sidebar-background-color;
     border-top-right-radius: 2em;
     border-bottom-right-radius: 2em;
+    padding-bottom: 2em;
+    padding-left: 0;
+    border-left: 8px solid $sidebar-left-border-color;
 }
+
+
 
 .user-panel {
     padding: 1em;
@@ -33,6 +43,7 @@
     .user-name {
         padding-left: 1em;
         text-size: 1.5em;
+        font-weight: bold;
     }
 }
 
@@ -43,8 +54,16 @@
     }
 
     a p {
+        font-size: 1.2em;
         padding-left: 1em;
+    }
+
+    &:hover {
     }
 }
 
+.active {
+    background-color: $active-background-color;
+    border-bottom-right-radius: 2em;
+}
 

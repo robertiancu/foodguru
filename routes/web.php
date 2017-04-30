@@ -25,7 +25,10 @@ Route::group(['prefix' => 'view/'], function() {
 });
 
 Route::group(['prefix' => 'image/'], function() {
-    Route::get('base/{img}', 'ImageController@baseImage');
+    Route::get('user/default', 'ImageController@defaultUser');
+    Route::get('base/sidebarIcon/{img}', 'ImageController@sidebarIcon');
 });
 
-Route::get('/home', 'HomeController@index');
+Route::group(['prefix' => 'ajax/'], function() {
+    Route::get('searchHints/{word}', 'AjaxController@searchHints');
+});
