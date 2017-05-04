@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -18,7 +20,7 @@ class RegisterController extends Controller
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
-    */
+     */
 
     use RegistersUsers;
 
@@ -27,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = 'view/home';
 
     /**
      * Create a new controller instance.
@@ -48,7 +50,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'image' => 'max:8000|dimensions:min_width=20,min_height=20,max_width=4000,max_height=4000|mimes:jpeg,jpg,png',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -62,10 +66,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $file = Input::file('image');
+        $new_user = User::create([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'image' => null,
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'admin' => false,
         ]);
+
+        $extension = $file->getMimeType();
+        $extension = explode("/", $extension)[1];
+        $new_image_name = ((string) $new_user->id) . "." . $extension;
+        $file = $file->move(public_path() . '/images/profile_images/' , $new_image_name);
+        $image_path = $file->getRealPath();
+        $new_user->image = $image_path;
+        $new_user->save();
+        return $new_user;
     }
 }

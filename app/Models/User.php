@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'password', 'admin',
     ];
 
     /**
@@ -63,5 +63,20 @@ class User extends Authenticatable
      */
     public function ratings() {
         return $this->hasMany(Rating::class);
+    }
+
+    /**
+     * 
+     *
+     * @return void
+     */
+    public function profileImageRoute()
+    {
+        $profile_image = $this->image;
+        if ($profile_image == null) {
+            return '/image/user/default';
+        } else {
+            return '/image/user/' . (string) $this->id;
+        }
     }
 }

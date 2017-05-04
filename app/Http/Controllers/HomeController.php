@@ -40,6 +40,6 @@ class HomeController extends Controller
         $url = url('/');
         $sidebar_items = $this->url_transformer->transformArray($sidebar_items, compact('url'));
 
-        return view('home', compact('sidebar_items'));
+        return view('views.home', compact('sidebar_items'));
     }
 }

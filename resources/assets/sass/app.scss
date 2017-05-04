@@ -4,66 +4,142 @@
 
 @import url('https://fonts.googleapis.com/css?family=Plaster');
 
+@import url('https://fonts.googleapis.com/css?family=Courgette|Megrim');
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 // Variables
 @import "variables";
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+/*
+ * Color settings
+ */
 $logo-text-color: white;
-$sidebar-background-color: #f5f5f5;
+$sidebar-background-color: #EeEeEe;
 $sidebar-left-border-color: #FF3B3F;
-$active-background-color: #D2D2A2;
+$sidebar-right-border-color: #E7E7E7;
+$active-text-color: #b2b2b2;
 
+/*
+ * General settings
+ */
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/*
+ * Logo
+ */
 #main-logo {
     font-family: 'Plaster', cursive;
     color: $logo-text-color;
     font-size: 2em;
 }
 
-#sidebar {
+/*
+ ******* Sidebar *******
+ */
+.sidebar {
     background-color: $sidebar-background-color;
     border-top-right-radius: 2em;
     border-bottom-right-radius: 2em;
-    padding-bottom: 2em;
+    margin-left: 0;
     padding-left: 0;
+    padding-right: 0;
     border-left: 8px solid $sidebar-left-border-color;
-}
-
-
-
-.user-panel {
-    padding: 1em;
-    margin-top: 1em;
-
-    * {
-        display: inline-block;
+    border-right: 2px solid $sidebar-right-border-color;
+    visibility: hidden;
+    @media screen and (min-width: 700px) {
+        visibility: visible;
+        position: fixed;
     }
-
-    .user-name {
-        padding-left: 1em;
-        text-size: 1.5em;
-        font-weight: bold;
+    @media screen and (max-width: 700px) {
+        display: none;
     }
 }
 
+/*
+ * Sidebar: User Info
+ */
+#user-panel {
+    padding-top: 1.5em;
+    padding-bottom: 0em;
+    text-align: center;
+
+    img, div {
+        // display: inline-block;
+    }
+
+    div {
+        margin-top: 1em;
+        p {
+            font-size: 1.2em;
+            font-weight: bold;
+            // font-family: 'Megrim', cursive;
+            span {
+                font-weight: normal;
+            }
+        }
+    }
+}
+
+/*
+ * Sidebar: Menu items
+ */
 .sidebar-item {
-    a * {
-        clear: none;
+    a img, a p {
         display: inline-block;
     }
 
+    vertical-align: middle;
     a p {
+        // font-family: 'Courgette', cursive;
         font-size: 1.2em;
-        padding-left: 1em;
+        color: #414141;
+        padding-left: 0.5em;
+        margin-bottom: 0;
+        margin-top: 3px;
     }
-
-    &:hover {
+    .active {
+        border-right: $sidebar-left-border-color solid 5px;
     }
 }
 
-.active {
-    background-color: $active-background-color;
-    border-bottom-right-radius: 2em;
+#sidebar-menu li a:hover {
+    background-color: rgba(0, 0, 0, 0);
+    p {
+        color: $active-text-color;
+    }
 }
 
+.hide-desktop {
+    @media screen and (min-width: 700px) {
+        display: none;
+    }
+}
+
+.mobile-nav {
+    @media screen and (min-width: 700px) {
+        display: none;
+    }
+    a img, a p {
+        display: inline-block;
+    }
+    a p {
+        // font-family: 'Courgette', cursive;
+        font-size: 1.2em;
+        color: #fafafa;
+        padding-left: 0.5em;
+        margin-bottom: 0;
+        margin-top: 3px;
+    }
+}
+
+
+
+/*
+ ******* General page content *******
+ */
