@@ -22,4 +22,6 @@ class RecipeController extends Controller
 
         return view('recipe', compact('recipe'));
     }
+
+    // TODO 
 }
