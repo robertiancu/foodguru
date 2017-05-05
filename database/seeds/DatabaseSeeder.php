@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(EventSeeder::class);
         $this->call(EventUserSeeder::class);
-        $this->call(EventRecipeSeeder::class);
-        $this->call(IngredientSeeder::class);
         $this->call(CategoriesSeeder::class);
         $this->call(RecipesSeeder::class);
         $this->call(RatingsSeeder::class);
+        $this->call(EventRecipeSeeder::class);
+        $this->call(IngredientSeeder::class);
     }
 }
