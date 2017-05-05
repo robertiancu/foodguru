@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Event;
+use App\Models\Favourite;
 use Illuminate\Database\QueryException;
 
-class EventSeeder extends Seeder
+class FavouriteSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,13 +13,13 @@ class EventSeeder extends Seeder
      */
     public function run()
     {
-        $events = factory(Event::class, 30)->make();
-        foreach ($events as $event) {
+        $favourites = factory(Favourite::class, 10)->make();
+        foreach ($favourites as $favourite) {
             repeat_query:
             try {
-                $event->save();
+                $favourite->save();
             } catch (QueryException $e) {
-                $event = factory(Event::class)->make();
+                $favourite = factory(Favourite::class)->make();
                 goto repeat_query;
             }
         }

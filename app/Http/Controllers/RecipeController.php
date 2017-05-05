@@ -12,9 +12,9 @@ class RecipeController extends Controller
      * Return the view with associated data for a recipe.
      *
      * @throws ModelNotFound
-     * @return void
+     * @return Response
      */
-    public function show()
+    public function show($id)
     {
         $recipe = [];
 

@@ -18,7 +18,7 @@ class CreateIngredientMetaTable extends Migration
 
             $table->integer('ingredient_id')->unsigned()->index();
             $table->string('key');
-            $table->double('value');
+            $table->string('value');
 
             $table->timestamps();
         });

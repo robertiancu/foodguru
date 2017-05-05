@@ -5344,14 +5344,6 @@
    "Fibre": 0
  },
  {
-   "Aliment": "Cafea frappe Original Nescafe",
-   "Calorii": "392",
-   "Proteine": 14.5,
-   "Lipide": 4.2,
-   "Carbohidrati": 73.3,
-   "Fibre": 0
- },
- {
    "Aliment": "Cafea Italian Espresso Based Illy",
    "Calorii": "15",
    "Proteine": 0.3,
@@ -6704,14 +6696,6 @@
    "Fibre": 3
  },
  {
-   "Aliment": "Cereale cookie crisp Nestle",
-   "Calorii": "377",
-   "Proteine": 6.4,
-   "Lipide": 3.4,
-   "Carbohidrati": 35.3,
-   "Fibre": 5.2
- },
- {
    "Aliment": "Cereale Cookie Crisp Nestle",
    "Calorii": "375",
    "Proteine": 6.3,
@@ -7270,14 +7254,6 @@
    "Lipide": 31,
    "Carbohidrati": 53.5,
    "Fibre": 7.3
- },
- {
-   "Aliment": "Ciocolata alba cu alune intregi Ritter Sport",
-   "Calorii": "583",
-   "Proteine": 8.4,
-   "Lipide": 39.9,
-   "Carbohidrati": 47.6,
-   "Fibre": 1.5
  },
  {
    "Aliment": "Ciocolata alba cu alune intregi Ritter Sport",
@@ -10777,14 +10753,6 @@
  },
  {
    "Aliment": "Crema de branza Campus Frischkase",
-   "Calorii": "162",
-   "Proteine": 7,
-   "Lipide": 13.5,
-   "Carbohidrati": 3,
-   "Fibre": 0
- },
- {
-   "Aliment": "Crema de branza Campus Frischkase",
    "Calorii": "175",
    "Proteine": 7,
    "Lipide": 14.5,
@@ -13269,14 +13237,6 @@
    "Proteine": 8.3,
    "Lipide": 5.7,
    "Carbohidrati": 37.8,
-   "Fibre": 0
- },
- {
-   "Aliment": "Foietaj fagure visine si budinca Fornetti XXL",
-   "Calorii": "324.8",
-   "Proteine": 5.9,
-   "Lipide": 14.5,
-   "Carbohidrati": 42.6,
    "Fibre": 0
  },
  {
@@ -26425,14 +26385,6 @@
  },
  {
    "Aliment": "Porumb fiert KFC",
-   "Calorii": "85",
-   "Proteine": 2.4,
-   "Lipide": 1.8,
-   "Carbohidrati": 15.8,
-   "Fibre": 2.4
- },
- {
-   "Aliment": "Porumb fiert KFC",
    "Calorii": "109.1",
    "Proteine": 3.5,
    "Lipide": 0.4,
@@ -29992,14 +29944,6 @@
    "Fibre": 0
  },
  {
-   "Aliment": "Sos de usturoi Glenn KFC",
-   "Calorii": "436",
-   "Proteine": 1.6,
-   "Lipide": 42.4,
-   "Carbohidrati": 11.6,
-   "Fibre": 0
- },
- {
    "Aliment": "Sos de usturoi Heinz",
    "Calorii": "240",
    "Proteine": 1,
@@ -31705,14 +31649,6 @@
  },
  {
    "Aliment": "Tarate de orez Now Foods",
-   "Calorii": "466.7",
-   "Proteine": 20,
-   "Lipide": 20,
-   "Carbohidrati": 53.3,
-   "Fibre": 13.3
- },
- {
-   "Aliment": "Tarate de orez Now Foods",
    "Calorii": "462",
    "Proteine": 19.8,
    "Lipide": 19.8,
@@ -31941,22 +31877,6 @@
    "Proteine": 17,
    "Lipide": 17.2,
    "Carbohidrati": 1,
-   "Fibre": 0
- },
- {
-   "Aliment": "Telemea de vaca Romfulda",
-   "Calorii": "243",
-   "Proteine": 17,
-   "Lipide": 17.2,
-   "Carbohidrati": 1,
-   "Fibre": 0
- },
- {
-   "Aliment": "Telemea de vaca Romfulda",
-   "Calorii": "120",
-   "Proteine": 15,
-   "Lipide": 4,
-   "Carbohidrati": 3,
    "Fibre": 0
  },
  {

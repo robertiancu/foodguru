@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Event;
+use App\Models\Step;
 use Illuminate\Database\QueryException;
 
-class EventSeeder extends Seeder
+class StepSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,13 +13,13 @@ class EventSeeder extends Seeder
      */
     public function run()
     {
-        $events = factory(Event::class, 30)->make();
-        foreach ($events as $event) {
+        $steps = factory(Step::class, 50)->make();
+        foreach ($steps as $step) {
             repeat_query:
             try {
-                $event->save();
+                $steps->save();
             } catch (QueryException $e) {
-                $event = factory(Event::class)->make();
+                $step = factory(Step::class)->make();
                 goto repeat_query;
             }
         }

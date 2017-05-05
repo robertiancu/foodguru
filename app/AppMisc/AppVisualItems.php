@@ -18,14 +18,19 @@ class AppVisualItems
     {
         return [
             [
-                'name' =>'Home',
+                'name' =>'Acasa',
                 'image' => 'house.png',
                 'route' => 'view/home'
             ],
             [
-                'name' =>'Browse Recipes',
+                'name' =>'Retete',
                 'image' => 'recipes.png',
                 'route' => 'view/recipes'
+            ],
+            [
+                'name' =>'Cercuri',
+                'image' => 'circles.png',
+                'route' => 'view/circles'
             ],
             [
                 'name' =>'Calendar',
@@ -33,17 +38,22 @@ class AppVisualItems
                 'route' => 'view/calendar'
             ],
             [
-                'name' =>'Fridge Guru',
+                'name' =>'Lista Cumparaturi',
+                'image' => 'shop_list.png',
+                'route' => 'view/shopList'
+            ],
+            [
+                'name' =>'Frigider Guru',
                 'image' => 'fridge.png',
                 'route' => 'view/fridge'
             ],
             [
-                'name' =>'Add Recipe',
+                'name' =>'Adauga Reteta',
                 'image' => 'add_recipe.png',
                 'route' => 'view/addRecipe'
             ],
             [
-                'name' =>'Add Ingredient',
+                'name' =>'Adauga Ingredient',
                 'image' => 'add_ingredient.png',
                 'route' => 'view/addIngredient'
             ]

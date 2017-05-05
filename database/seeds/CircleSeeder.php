@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Event;
+use App\Models\Circle;
 use Illuminate\Database\QueryException;
 
-class EventSeeder extends Seeder
+class CircleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,13 +13,13 @@ class EventSeeder extends Seeder
      */
     public function run()
     {
-        $events = factory(Event::class, 30)->make();
-        foreach ($events as $event) {
+        $circles = factory(Circle::class, 10)->make();
+        foreach ($circles as $circle) {
             repeat_query:
             try {
-                $event->save();
+                $circle->save();
             } catch (QueryException $e) {
-                $event = factory(Event::class)->make();
+                $circle = factory(Circle::class)->make();
                 goto repeat_query;
             }
         }

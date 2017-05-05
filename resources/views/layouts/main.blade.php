@@ -3,51 +3,70 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ config('app.name') }}</title>
     </head>
     <body>
-        <div class="wrapper" style="height: auto;">
-            <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" id="main-logo" href="#">Food Guru</a>
-                    </div>
-                    <div id="navbar" class="navbar-collapse collapse">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" id="main-logo" href="/view/home">Food Guru</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <div class="hide-desktop">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Settings</a></li>
-                            <li><a href="#">Profile</a></li>
+                            @foreach($sidebar_items as $sidebar_item)
+                                <li class="{{ $sidebar_item['route'] == 'view/home' ? 'active' : '' }} mobile-nav">
+                                    <a href="{{ $sidebar_item['route'] }}">
+                                        <img src="{{ '/image/base/sidebarIcon/' . $sidebar_item['image'] }}" alt="">
+                                        <p>{{ $sidebar_item['name'] }}</p>
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                         <form class="navbar-form navbar-right">
-                            <input type="text" id="recipe-search" class="form-control" placeholder="Search...">
+                            <input type="text" id="recipe-search" class="form-control" placeholder="Cauta reteta...">
                         </form>
                     </div>
                 </div>
-            </nav>
-            <div id="sidebar" class="col-sm-3 col-md-2 sidebar">
-                <div class="user-panel">
-                    <img class="img-circle" src="/image/user/default" alt="">
-                    <p class="user-name">{{--{{ Auth::user()->name }}--}}{{ 'Prenume Nume' }}</p>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div id="sidebar" class="col-sm-2 col-md-2 sidebar">
+                    <div id="user-panel">
+                        <img class="img-circle" src="{{ Auth::user()->profileImageRoute() }}" alt="">
+                        <div>
+                            <p class="user-name"><span>Bun venit,</span> <br> {{ Auth::user()->first_name }}</p>
+                        </div>
+                        <form class="">
+                            <input type="text" id="recipe-search" class="form-control" placeholder="Cauta Reteta...">
+                        </form>
+                    </div>
+
+                    <ul id="sidebar-menu" class="nav nav-sidebar">
+                        @foreach($sidebar_items as $sidebar_item)
+                            <li class="{{ $sidebar_item['route'] == 'view/home' ? 'active' : '' }} sidebar-item">
+                                <a href="{{ $sidebar_item['route'] }}">
+                                    <img src="{{ '/image/base/sidebarIcon/' . $sidebar_item['image'] }}" alt="">
+                                    <p>{{ $sidebar_item['name'] }}</p>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
 
-                <hr>
-
-                <ul id="sidebar-menu" class="nav nav-sidebar">
-                    @foreach($sidebar_items as $sidebar_item)
-                        <li class="{{ $sidebar_item['route'] == 'view/home' ? 'active' : '' }} sidebar-item">
-                            <a href="{{ $sidebar_item['route'] }}">
-                                <img src="{{ '/image/base/sidebarIcon/' . $sidebar_item['image'] }}" alt="">
-                                <p>{{ $sidebar_item['name'] }}</p>
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
+                <div class="col-sm-10 sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <div class="container">
+                        @yield('content')
+                    </div>
+                </div>
             </div>
         </div>
         <script src="{{ asset('js/app.js') }}"></script>

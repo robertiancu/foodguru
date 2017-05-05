@@ -18,7 +18,7 @@ class CircleUser extends Model
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * Indicates if the primary key is incrementing.
