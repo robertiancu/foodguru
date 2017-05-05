@@ -13,7 +13,7 @@ class EventSeeder extends Seeder
      */
     public function run()
     {
-        $events = factory(Event::class, 50)->make();
+        $events = factory(Event::class, 30)->make();
         foreach ($events as $event) {
             repeat_query:
             try {

@@ -21,44 +21,64 @@ class IngredientSeeder extends Seeder
         $data = json_decode($json);
 
         foreach ($data as $key=>$obj) {
-            $ingredient = factory(Ingredient::class)->make(array(
-                'id' => $key + 1 ,
-                'name' => $obj->Aliment,
-                'image' => null,
-            ));
-            $ingredientMeta1 = factory(IngredientMeta::class)->make(array(
-                'ingredient_id' => $key + 1,
-                'key' => 'Calorii',
-                'value' => $obj->Calorii,
-            ));
-            $ingredientMeta2 = factory(IngredientMeta::class)->make(array(
-                'ingredient_id' => $key + 1,
-                'key' => 'Proteine',
-                'value' => $obj->Proteine,
-            ));
-            $ingredientMeta3 = factory(IngredientMeta::class)->make(array(
-                'ingredient_id' => $key + 1,
-                'key' => 'Lipide',
-                'value' => $obj->Lipide,
-            ));
-            $ingredientMeta4 = factory(IngredientMeta::class)->make(array(
-                'ingredient_id' => $key + 1,
-                'key' => 'Carbohidrati',
-                'value' => $obj->Carbohidrati,
-            ));
-            $ingredientMeta5 = factory(IngredientMeta::class)->make(array(
-                'ingredient_id' => $key + 1,
-                'key' => 'Fibre',
-                'value' => $obj->Fibre,
-            ));
+            $ingredient_id = $key + 1;
+            $aliment = $obj->Aliment;
+            $calories = (double)$obj->Calorii;
+            $proteins = (double)$obj->Proteine;
+            $lipids = (double)$obj->Lipide;
+            $carbs = (double)$obj->Carbohidrati;
+            $fibers = (double)$obj->Fibre;
+            DB::statement("INSERT
+                INTO ingredients (id, name, image, calories, proteins, lipids, carbs, fibers, description, unit, class, created_at)
+                VALUES ($ingredient_id, '$aliment', NULL, $calories, $proteins, $lipids, $carbs, $fibers, NULL, 'g', 2, NOW())");
 
-            $ingredient->save();
+            //DB::statement("INSERT INTO ingredient_meta (ingredient_id, `key`, `value`, created_at) VALUES ($ingredient_id, 'calorii', $calorii, NOW())");
 
-            $ingredientMeta1->save();
-            $ingredientMeta2->save();
-            $ingredientMeta3->save();
-            $ingredientMeta4->save();
-            $ingredientMeta5->save();
+            //DB::statement("INSERT INTO ingredient_meta (ingredient_id, `key`, `value`, created_at) VALUES ($ingredient_id, 'proteine', $proteine, NOW())");
+
+            //DB::statement("INSERT INTO ingredient_meta (ingredient_id, `key`, `value`, created_at) VALUES ($ingredient_id, 'lipide', $lipide, NOW())");
+
+            //DB::statement("INSERT INTO ingredient_meta (ingredient_id, `key`, `value`, created_at) VALUES ($ingredient_id, 'carbohidrati', $carbohidrati, NOW())");
+
+            //DB::statement("INSERT INTO ingredient_meta (ingredient_id, `key`, `value`, created_at) VALUES ($ingredient_id, 'Fibre', $fibre, NOW())");
+            /*$ingredient = factory(Ingredient::class)->make(array(*/
+                //'id' => $key + 1 ,
+                //'name' => $obj->Aliment,
+                //'image' => null,
+            //));
+            //$ingredientMeta1 = factory(IngredientMeta::class)->make(array(
+                //'ingredient_id' => $key + 1,
+                //'key' => 'Calorii',
+                //'value' => $obj->Calorii,
+            //));
+            //$ingredientMeta2 = factory(IngredientMeta::class)->make(array(
+                //'ingredient_id' => $key + 1,
+                //'key' => 'Proteine',
+                //'value' => $obj->Proteine,
+            //));
+            //$ingredientMeta3 = factory(IngredientMeta::class)->make(array(
+                //'ingredient_id' => $key + 1,
+                //'key' => 'Lipide',
+                //'value' => $obj->Lipide,
+            //));
+            //$ingredientMeta4 = factory(IngredientMeta::class)->make(array(
+                //'ingredient_id' => $key + 1,
+                //'key' => 'Carbohidrati',
+                //'value' => $obj->Carbohidrati,
+            //));
+            //$ingredientMeta5 = factory(IngredientMeta::class)->make(array(
+                //'ingredient_id' => $key + 1,
+                //'key' => 'Fibre',
+                //'value' => $obj->Fibre,
+            //));
+
+            //$ingredient->save();
+
+            //$ingredientMeta1->save();
+            //$ingredientMeta2->save();
+            //$ingredientMeta3->save();
+            //$ingredientMeta4->save();
+            /*$ingredientMeta5->save();*/
 
         }
     }

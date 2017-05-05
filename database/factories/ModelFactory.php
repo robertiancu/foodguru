@@ -40,7 +40,7 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Pivots\EventUser::class, function (Faker\Generator $faker) {
     return [
-        'event_id' => $faker->numberBetween(1, 50),
+        'event_id' => $faker->numberBetween(1, 30),
         'user_id' => $faker->numberBetween(1, 100)
     ];
 });
@@ -48,8 +48,8 @@ $factory->define(App\Models\Pivots\EventUser::class, function (Faker\Generator $
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Misc\EventRecipe::class, function (Faker\Generator $faker) {
     return [
-        'recipe_id' => $faker->numberBetween(1, 5),
-        'event_id' => $faker->numberBetween(1, 50)
+        'event_id' => $faker->numberBetween(1, 50),
+        'recipe_id' => $faker->numberBetween(1, 30)
     ];
 });
 
