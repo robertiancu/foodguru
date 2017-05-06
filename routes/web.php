@@ -28,7 +28,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::get('ingredient/{id}', 'RecipeController@show');
 
         Route::get('circles', 'CircleController@index');
-        Route::get('circle/{id}', 'CircleController@show');
+        Route::get('circle/{circle}', 'CircleController@show');
+
+        Route::get('favourites', 'FavouriteController@index');
 
         Route::get('calendar', 'CalendarController@index');
 

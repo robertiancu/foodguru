@@ -9,14 +9,10 @@ use App\Models\Recipe;
 
 
 class FavouriteController extends Controller
-{
-    
-    public function __construct(){
-        $this->middleware('auth');
-    }
+{ 
 
     public function index(){
-        $favourites = auth()->user()->favourites->paginate(10)->get();
+        $favourites = auth()->user()->favourites;
         $recipies = $favourites->map(function ($item,$key){
                     return $item->recipe;
                 });
