@@ -27,4 +27,25 @@ class Recipe extends Model
     	return $this->belongsToMany('App\Event');
     }
 
+    /**
+     * Laravel scope for returning recent recipies.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeMostRecent($query)
+    {
+        return $query->orderBy('created_at', 'DESC');
+    }
+
+    /**
+     * Laravel scope for returning recent recipies.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeBestRatings($query)
+    {
+        return $query->orderBy('created_at', 'DESC');
+    }
 }

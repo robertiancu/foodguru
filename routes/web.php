@@ -21,6 +21,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::group(['prefix' => 'view/'], function() {
         Route::get('home', 'HomeController@index');
 
+        Route::get('category/{id}', 'RecipeController@show');
         Route::get('recipes', 'RecipeController@index');
         Route::get('recipe/{id}', 'RecipeController@show');
 
