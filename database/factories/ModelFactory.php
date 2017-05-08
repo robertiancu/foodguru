@@ -68,3 +68,35 @@ $factory->define(App\Models\Misc\IngredientMeta::class, function (Faker\Generato
 
     return [];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Rating::class, function (Faker\Generator $faker) {
+    return [
+        'recipe_id' => $faker->numberBetween(1, 5),
+        'user_id' => $faker->numberBetween(1, 50),
+        'rating' => $faker->numberBetween(1, 5)
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Recipe::class, function (Faker\Generator $faker) {
+    return [
+
+
+        'category_id' => $faker->numberBetween(1, 5),
+        'name' => $faker->words($nb = 3, $asText = true),
+        'image' => $faker->imageUrl(640,480,'food'),
+        'description' => $faker->text,
+        'time' => $faker->numberBetween(15,200),
+        'difficulty' => $faker->numberBetween(1,10)
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->words($nb = 3, $asText = true),
+        'image' => $faker->imageUrl(320,320,'food'),
+        'description' => $faker->text
+    ];
+});
