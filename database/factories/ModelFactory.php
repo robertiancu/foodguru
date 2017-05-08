@@ -18,10 +18,11 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     return [
         'first_name' => $faker->firstName(null),
         'last_name' => $faker->lastName,
+        'image' => null,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
-        'admin' => $faker->boolean
+        'admin' => $faker->boolean,
+        'remember_token' => str_random(10)
     ];
 });
 
@@ -55,6 +56,59 @@ $factory->define(App\Models\Misc\EventRecipe::class, function (Faker\Generator $
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Ingredient::class, function (Faker\Generator $faker) {
+    return [
+        'description' => $faker->paragraph(1),
+        'unit' => 'grame',
+        'class' => 2
+    ];
+});
+
+$factory->define(App\Models\Circle::class, function (Faker\Generator $faker){
+    return [
+        'name' => $faker->name,
+        'owner_id' => $faker->numberBetween(1,100),
+        'public' => $faker->boolean
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Misc\IngredientMeta::class, function (Faker\Generator $faker) {
+    return [
+        'ingredient_id' => $faker->numberBetween(1, 100),
+        'key' => $faker->paragraph(1),
+        'value' => $faker->boolean ? 'adevarat' : 'fals'
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Rating::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => $faker->numberBetween(1, 100),
+        'recipe_id' => $faker->numberBetween(1, 5),
+        'rating' => $faker->numberBetween(1, 5)
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Recipe::class, function (Faker\Generator $faker) {
+    return [
+        'category_id' => $faker->numberBetween(1, 5),
+        'name' => $faker->words($nb = 3, $asText = true),
+        'image' => $faker->boolean ? $faker->imageUrl(640,480,'food') : null,
+        'description' => $faker->text,
+        'time' => $faker->numberBetween(15,200),
+        'difficulty' => $faker->numberBetween(1,10)
+    ];
+});
+
+$factory->define(App\Models\Pivots\CircleUser::class, function (Faker\Generator $faker){
+    return [
+        'circle_id' => $faker->numberBetween(1,10),
+        'user_id' => $faker->numberBetween(1,100)
+        ];
+});
+
+$factory->define(App\Models\Ingredient::class, function (Faker\Generator $faker) {
 
     return [
         'description' => $faker->paragraph(1),
@@ -64,39 +118,26 @@ $factory->define(App\Models\Ingredient::class, function (Faker\Generator $faker)
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\Misc\IngredientMeta::class, function (Faker\Generator $faker) {
-
-    return [];
-});
-
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\Rating::class, function (Faker\Generator $faker) {
-    return [
-        'recipe_id' => $faker->numberBetween(1, 5),
-        'user_id' => $faker->numberBetween(1, 50),
-        'rating' => $faker->numberBetween(1, 5)
-    ];
-});
-
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\Recipe::class, function (Faker\Generator $faker) {
-    return [
-
-
-        'category_id' => $faker->numberBetween(1, 5),
-        'name' => $faker->words($nb = 3, $asText = true),
-        'image' => $faker->imageUrl(640,480,'food'),
-        'description' => $faker->text,
-        'time' => $faker->numberBetween(15,200),
-        'difficulty' => $faker->numberBetween(1,10)
-    ];
-});
-
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->words($nb = 3, $asText = true),
-        'image' => $faker->imageUrl(320,320,'food'),
+        'image' => $faker->boolean ? $faker->imageUrl(320,320,'food') : null,
         'description' => $faker->text
+    ];
+});
+
+$factory->define(App\Models\Favourite::class, function (Faker\Generator $faker){
+    return [
+        'user_id' => $faker->numberBetween(1,100),
+        'recipe_id' => $faker->numberBetween(1,5)
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Step::class, function (Faker\Generator $faker){
+    return [
+        'step_number' => $faker->numberBetween(1,15),
+        'content' => $faker->text,
+        'recipe_id' => $faker->numberBetween(1,5)
     ];
 });

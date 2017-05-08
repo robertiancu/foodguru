@@ -19,5 +19,9 @@ class DatabaseSeeder extends Seeder
         $this->call(EventRecipeSeeder::class);
         $this->call(EventSeeder::class);
         $this->call(EventUserSeeder::class);
+        $this->call(CircleSeeder::class);
+        $this->call(CircleUserSeeder::class);
+        $this->call(FavouriteSeeder::class);
+        $this->call(StepSeeder::class);
     }
 }

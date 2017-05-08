@@ -43,7 +43,7 @@ class User extends Authenticatable
      */
     public function circles()
     {
-        return $this->belongsToMany(Circles::class);
+        return $this->belongsToMany(Circle::class);
     }
 
     /**

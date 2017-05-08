@@ -29,7 +29,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::get('ingredient/{id}', 'RecipeController@show');
 
         Route::get('circles', 'CircleController@index');
-        Route::get('circle/{id}', 'RecipeController@show');
+        Route::get('circle/{circle}', 'CircleController@show');
+
+        Route::get('favourites', 'FavouriteController@index');
 
         Route::get('calendar', 'CalendarController@index');
 
@@ -41,7 +43,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
     Route::post('recipe/{id}', 'RecipeController@store');
     Route::post('ingredient/{id}', 'RecipeController@store');
-    Route::post('circle/{id}', 'CircleController@store');
+    Route::post('circle', 'CircleController@store');
     Route::post('addCalendarEvent', 'CalendarController@addEvent');
 
     Route::group(['prefix' => 'image/'], function() {
