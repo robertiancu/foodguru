@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Step;
-use Illuminate\Database\QueryException;
+use App\Models\Pivots\IngredientRecipe;
 
-class StepSeeder extends Seeder
+class IngredientRecipeSeeder extends Seeder
 {
     /**
      * Run the database seeds.

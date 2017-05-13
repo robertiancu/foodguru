@@ -8,6 +8,8 @@ use App\Models\Event;
 
 class EventRecipe extends Model
 {
+    protected $table = 'event_recipes';
+
     /**
      * Return the recipe associated with this instance.
      *

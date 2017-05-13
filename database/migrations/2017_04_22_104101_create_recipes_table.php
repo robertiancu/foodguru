@@ -22,6 +22,10 @@ class CreateRecipesTable extends Migration
             $table->text('description');
             $table->integer('time');
             $table->integer('difficulty');
+
+            $table->integer('user_id')->unsigned();
+            $table->boolean('published');
+
             $table->timestamps();
         });
     }

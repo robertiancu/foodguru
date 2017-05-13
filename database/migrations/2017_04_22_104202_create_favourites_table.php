@@ -19,6 +19,9 @@ class CreateFavouritesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('recipe_id')->unsigned();
             $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
+
+            $table->unique(['user_id', 'recipe_id']);
+
             $table->timestamps();
         });
     }

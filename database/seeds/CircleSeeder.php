@@ -19,6 +19,7 @@ class CircleSeeder extends Seeder
             try {
                 $circle->save();
             } catch (QueryException $e) {
+                echo $e->message;
                 $circle = factory(Circle::class)->make();
                 goto repeat_query;
             }

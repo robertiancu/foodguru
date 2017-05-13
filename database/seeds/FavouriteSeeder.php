@@ -13,7 +13,7 @@ class FavouriteSeeder extends Seeder
      */
     public function run()
     {
-        $favourites = factory(Favourite::class, 10)->make();
+        $favourites = factory(Favourite::class, 100)->make();
         foreach ($favourites as $favourite) {
             repeat_query:
             try {

@@ -25,6 +25,10 @@ class CreateIngredientsTable extends Migration
             $table->text('description')->nullable();
             $table->string('unit');
             $table->integer('class');
+
+            $table->integer('user_id')->unsigned();
+            $table->boolean('published');
+
             $table->timestamps();
         });
     }

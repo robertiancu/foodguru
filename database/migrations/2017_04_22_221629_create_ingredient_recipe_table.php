@@ -17,6 +17,9 @@ class CreateIngredientRecipeTable extends Migration
             $table->integer('ingredient_id')->unsigned()->index();
             $table->integer('recipe_id')->unsigned()->index();
             $table->primary(['ingredient_id', 'recipe_id']);
+
+            $table->integer('quantity');
+            $table->string('detail')->nullable();
         });
 
         Schema::table('ingredient_recipe', function($table) {

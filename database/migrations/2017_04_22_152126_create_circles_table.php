@@ -16,8 +16,8 @@ class CreateCirclesTable extends Migration
         Schema::create('circles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('owner_id')->unsigned();
-            $table->foreign('owner_id')->references('id')->on('users');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->boolean('public');
             $table->timestamps();
         });

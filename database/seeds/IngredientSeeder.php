@@ -29,8 +29,8 @@ class IngredientSeeder extends Seeder
             $carbs = (double)$obj->Carbohidrati;
             $fibers = (double)$obj->Fibre;
             DB::statement("INSERT
-                INTO ingredients (id, name, image, calories, proteins, lipids, carbs, fibers, description, unit, class, created_at)
-                VALUES ($ingredient_id, '$aliment', NULL, $calories, $proteins, $lipids, $carbs, $fibers, NULL, 'g', 2, NOW())");
+                INTO ingredients (id, name, image, calories, proteins, lipids, carbs, fibers, description, unit, class, user_id, published, created_at)
+                VALUES ($ingredient_id, '$aliment', NULL, $calories, $proteins, $lipids, $carbs, $fibers, NULL, 'g', 2, 1, 1, NOW())");
 
             //DB::statement("INSERT INTO ingredient_meta (ingredient_id, `key`, `value`, created_at) VALUES ($ingredient_id, 'calorii', $calorii, NOW())");
 

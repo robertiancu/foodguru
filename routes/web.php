@@ -23,17 +23,21 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
         Route::get('category/{id}', 'RecipeController@show');
         Route::get('recipes', 'RecipeController@index');
+        Route::get('recipe/create', 'RecipeController@create');
         Route::get('recipe/{id}', 'RecipeController@show');
 
         Route::get('ingredients', 'RecipeController@index');
+        Route::get('ingredient/create', 'RecipeController@create');
         Route::get('ingredient/{id}', 'RecipeController@show');
 
         Route::get('circles', 'CircleController@index');
+        Route::get('circle/create', 'CircleController@create');
         Route::get('circle/{circle}', 'CircleController@show');
 
         Route::get('favourites', 'FavouriteController@index');
 
         Route::get('calendar', 'CalendarController@index');
+        Route::get('event/create', 'CalendarController@createEvent');
 
         Route::get('shopLists', 'ShopListController@index');
         Route::get('shopList/{id}', 'ShopListController@show');

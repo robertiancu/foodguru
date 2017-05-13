@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Category;
+use App\Models\Friend;
 use Illuminate\Database\QueryException;
 
-class CategoriesSeeder extends Seeder
+class FriendSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,13 +13,13 @@ class CategoriesSeeder extends Seeder
      */
     public function run()
     {
-        $categories = factory(Category::class, 10)->make();
-        foreach ($categories as $category) {
+        $friends = factory(Friend::class, 100)->make();
+        foreach ($friends as $friend) {
             repeat_query:
             try {
-                $category->save();
+                $friend->save();
             } catch (QueryException $e) {
-                $category = factory(Category::class)->make();
+                $friend = factory(Friend::class)->make();
                 goto repeat_query;
             }
         }

@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Category;
+use App\Models\Misc\IngredientMeta;
 use Illuminate\Database\QueryException;
 
-class CategoriesSeeder extends Seeder
+class IngredientMetaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,13 +13,13 @@ class CategoriesSeeder extends Seeder
      */
     public function run()
     {
-        $categories = factory(Category::class, 10)->make();
-        foreach ($categories as $category) {
+        $ingredient_metas = factory(IngredientMeta::class, 500)->make();
+        foreach ($ingredient_metas as $ingredient_meta) {
             repeat_query:
             try {
-                $category->save();
+                $ingredient_meta->save();
             } catch (QueryException $e) {
-                $category = factory(Category::class)->make();
+                $ingredient_meta = factory(IngredientMeta::class)->make();
                 goto repeat_query;
             }
         }
