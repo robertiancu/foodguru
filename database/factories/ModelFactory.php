@@ -35,6 +35,14 @@ $factory->define(App\Models\Friend::class, function (Faker\Generator $faker) {
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\FriendRequest::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => $faker->numberBetween(1,100),
+        'new_friend_id' => $faker->numberBetween(1,100)
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
     $date_time = $faker->dateTimeBetween('+0 days', '+2 days');
     $interval = new DateInterval('PT2H');

@@ -103,9 +103,10 @@ body {
         margin-bottom: 0;
         margin-top: 3px;
     }
-    .active {
-        border-right: $sidebar-left-border-color solid 5px;
-    }
+}
+
+#sidebar-menu li.active {
+    border-right: $sidebar-left-border-color solid 5px;
 }
 
 #sidebar-menu li a:hover {

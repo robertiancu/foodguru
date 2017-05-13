@@ -10,8 +10,9 @@ class CircleController extends Controller
 {
     public function index(){
         $circles = auth()->user()->circles;
+        $sidebar_items = $this->getSidebarMenuItems();
 
-        return view('circles.index',compact('circles'));
+        return view('views.circles', compact('circles', 'sidebar_items'));
     }
 
     public function create(){

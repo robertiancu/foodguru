@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Friend;
+use App\Models\FriendRequest;
 
 class User extends Authenticatable
 {
@@ -37,6 +39,33 @@ class User extends Authenticatable
     }
 
     /**
+     * Returns all the friends of this user.
+     *
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function friends() {
+        return $this->hasMany(Friend::class);
+    }
+
+    /**
+     * Returns all the friend requests for this user.
+     *
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function friendRequestsRecived() {
+        return $this->hasMany(FriendRequest::class, 'new_friend_id', 'id');
+    }
+
+    /**
+     * Returns all the friend requests created by this user.
+     *
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function friendRequestsGiven() {
+        return $this->hasMany(FriendRequest::class, 'user_id', 'id');
+    }
+
+    /**
      * Returns all the cirles that this user belongs to.
      *
      * @return Illuminate\Database\Eloquent\Collection
@@ -66,7 +95,7 @@ class User extends Authenticatable
     }
 
     /**
-     * 
+     * Return route to profile image or image from give url.
      *
      * @return void
      */

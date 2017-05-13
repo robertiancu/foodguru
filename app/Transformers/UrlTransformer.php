@@ -18,7 +18,7 @@ class UrlTransformer extends Transformer
         return [
             'name' => $item['name'],
             'image' => $item['image'],
-            'route' => $item['route'],
+            'route' => '/' . $item['route'],
             'url' => $this->url . '/' . $item['route']
         ];
     }

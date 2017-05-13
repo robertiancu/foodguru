@@ -6,6 +6,7 @@ use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Recipe;
+use App\Models\Category;
 
 class RecipeController extends Controller
 {
@@ -36,13 +37,15 @@ class RecipeController extends Controller
 
         $recent_recipies = Recipe::mostRecent()->take(8)->get();
 
-        $best_ratings = DB::select("select re.id, re.name, sum(ra.rating) as total_rating
-            from recipies re
-            left join ratings ra on ra.recipe_id = re.id
-            sort by total_rating DESC
-            limit 8");
+        $sidebar_items = $this->getSidebarMenuItems();
 
-        return view('views.recipes', compact('categories', 'recent_recipies', 'best_ratings'));
+        //$best_ratings = DB::select("select re.id, re.name, sum(ra.rating) as total_rating
+            //from recipies re
+            //left join ratings ra on ra.recipe_id = re.id
+            //sort by total_rating DESC
+            //limit 8");
+
+        return view('views.recipes', compact('categories', 'recent_recipies', 'sidebar_items'));
     }
 
     /**
@@ -50,7 +53,7 @@ class RecipeController extends Controller
      *
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    public function validate(Request $request)
+    public function validator(Request $request)
     {
         $rules = [
             'name' => 'required|string|max:50',
@@ -77,7 +80,7 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = $this->validate($request);
+        $validator = $this->validator($request);
 
         if ($validator->fails()) {
             return redirect('recipe/create')

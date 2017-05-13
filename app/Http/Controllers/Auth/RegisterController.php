@@ -76,13 +76,15 @@ class RegisterController extends Controller
             'admin' => false,
         ]);
 
-        $extension = $file->getMimeType();
-        $extension = explode("/", $extension)[1];
-        $new_image_name = ((string) $new_user->id) . "." . $extension;
-        $file = $file->move(public_path() . '/images/profile_images/' , $new_image_name);
-        $image_path = $file->getRealPath();
-        $new_user->image = $image_path;
-        $new_user->save();
+        if ($file) {
+            $extension = $file->getMimeType();
+            $extension = explode("/", $extension)[1];
+            $new_image_name = ((string) $new_user->id) . "." . $extension;
+            $file = $file->move(public_path() . '/images/profile_images/' , $new_image_name);
+            $image_path = $file->getRealPath();
+            $new_user->image = $image_path;
+            $new_user->save();
+        }
         return $new_user;
     }
 }

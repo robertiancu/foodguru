@@ -40,7 +40,7 @@ class AppVisualItems
             [
                 'name' =>'Lista Cumparaturi',
                 'image' => 'shop_list.png',
-                'route' => 'view/shopList'
+                'route' => 'view/shopLists'
             ],
             [
                 'name' =>'Frigider Guru',
