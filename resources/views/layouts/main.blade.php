@@ -4,7 +4,16 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name') }}</title>
+
+        @yield('head')
+
+        <script>
+            window.Laravel = {!! json_encode([
+                'csrfToken' => csrf_token(),
+            ]) !!};
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -30,37 +39,43 @@
                                 </li>
                             @endforeach
                         </ul>
-                        <form class="navbar-form navbar-right">
-                            <input type="text" id="recipe-search" class="form-control" placeholder="Cauta reteta...">
+                        <form class="navbar-form navbar-right" action="">
+                            {{--<input type="text" id="navbar-recipe-search" class="form-control" placeholder="Cauta reteta...">--}}
+                            <div class="input-group">
+                                <input type="text" id="navbar-recipe-search" class="form-control" placeholder="Cauta Reteta...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default navbar-search-button" type="submit">Cauta</button>
+                                </span>
+                            </div><!-- /input-group -->
                         </form>
                     </div>
-                        <ul class="nav navbar-nav navbar-right">
-                            <!-- Authentication Links -->
-                            @if (Auth::guest())
-                                <li><a href="{{ route('login') }}">Login</a></li>
-                                <li><a href="{{ route('register') }}">Register</a></li>
-                            @else
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                        {{ Auth::user()->first_name }} <span class="caret"></span>
-                                    </a>
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+                        @if (Auth::guest())
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                        @else
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->first_name }} <span class="caret"></span>
+                                </a>
 
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li>
-                                            <a href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                                Logout
-                                            </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
 
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                {{ csrf_field() }}
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </li>
-                            @endif
-                        </ul>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -72,8 +87,15 @@
                         <div>
                             <p class="user-name"><span>Bun venit,</span> <br> {{ Auth::user()->first_name }}</p>
                         </div>
-                        <form class="">
-                            <input type="text" id="recipe-search" class="form-control" placeholder="Cauta Reteta...">
+                        <form class="" action="">
+                            {{--<input type="text" id="sidebar-recipe-search" class="form-control" placeholder="Cauta Reteta...">--}}
+                            {{--<input type="submit" value="Cauta">--}}
+                            <div class="input-group">
+                                <input type="text" id="sidebar-recipe-search" class="form-control" placeholder="Cauta Reteta...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default sidebar-search-button" type="submit">></button>
+                                </span>
+                            </div><!-- /input-group -->
                         </form>
                     </div>
 
@@ -89,10 +111,8 @@
                     </ul>
                 </div>
 
-                <div class="col-sm-10 sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <div class="container">
-                        @yield('content')
-                    </div>
+                <div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 col-lg-10 col-lg-offset-2">
+                    @yield('content')
                 </div>
             </div>
         </div>

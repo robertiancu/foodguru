@@ -19,7 +19,7 @@ class ImageController extends Controller
     {
         $image_path = resource_path('assets/images/sidebar_icons/' . $img);
 
-        return Image::make($image_path)->resize(30, 30)->response('png');
+        return Image::make($image_path)->resize(20, 20)->response('png');
     }
 
     /**
@@ -31,7 +31,7 @@ class ImageController extends Controller
     {
         $image_path = resource_path('assets/images/default_user.png');
 
-        return Image::make($image_path)->resize(80, 80)->response('png');
+        return Image::make($image_path)->resize(70, 70)->response('png');
     }
 
     /**
@@ -48,6 +48,6 @@ class ImageController extends Controller
         $user = User::findOrFail($id);
 
         $image_path = $user->image;
-        return Image::make($image_path)->resize(80, 80)->response('png');
+        return Image::make($image_path)->resize(70, 70)->response('png');
     }
 }

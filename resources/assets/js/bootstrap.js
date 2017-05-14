@@ -7,7 +7,10 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = window.jQuery = require('jquery');
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+import 'jquery-ui/ui/widgets/autocomplete.js';
+import 'fullcalendar';
 
 require('bootstrap-sass');
 
@@ -17,7 +20,7 @@ require('bootstrap-sass');
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = require('vue');
+//window.Vue = require('vue');
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

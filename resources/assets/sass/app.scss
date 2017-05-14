@@ -14,11 +14,14 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+@import '~jquery-ui/themes/base/all.css';
+
 /*
  * Color settings
  */
 $logo-text-color: white;
-$sidebar-background-color: #EeEeEe;
+//$sidebar-background-color: #EeEeEe;
+$sidebar-background-color: #FFF8DC;
 $sidebar-left-border-color: #FF3B3F;
 $sidebar-right-border-color: #E7E7E7;
 $active-text-color: #b2b2b2;
@@ -29,6 +32,10 @@ $active-text-color: #b2b2b2;
 body {
     font-family: 'Open Sans', sans-serif;
 }
+
+//.wrapper {
+    //margin-top: 100px;
+//}
 
 /*
  * Logo
@@ -51,14 +58,17 @@ body {
     padding-right: 0;
     border-left: 8px solid $sidebar-left-border-color;
     border-right: 2px solid $sidebar-right-border-color;
-    visibility: hidden;
-    @media screen and (min-width: 700px) {
+    transition: 0.5s width ease-in-out;
+    box-shadow: 0 0 10px #bbb;
+    @media screen and (min-width: 766px) {
         visibility: visible;
         position: fixed;
+        width: 200px;
     }
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 766px) {
         display: none;
     }
+
 }
 
 /*
@@ -76,7 +86,7 @@ body {
     div {
         margin-top: 1em;
         p {
-            font-size: 1.2em;
+            font-size: 1em;
             font-weight: bold;
             // font-family: 'Megrim', cursive;
             span {
@@ -84,6 +94,10 @@ body {
             }
         }
     }
+}
+
+#user-panel .sidebar-search-button {
+    width: 30px;
 }
 
 /*
@@ -97,11 +111,13 @@ body {
     vertical-align: middle;
     a p {
         // font-family: 'Courgette', cursive;
-        font-size: 1.2em;
+        font-size: 1em;
         color: #414141;
-        padding-left: 0.5em;
+        padding-left: 0.2em;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        margin-top: 0;
         margin-bottom: 0;
-        margin-top: 3px;
     }
 }
 
@@ -117,7 +133,7 @@ body {
 }
 
 .hide-desktop {
-    @media screen and (min-width: 700px) {
+    @media screen and (min-width: 766px) {
         display: none;
     }
 }
@@ -144,3 +160,11 @@ body {
 /*
  ******* General page content *******
  */
+
+.main {
+
+}
+
+.calendar-container {
+    padding-right: 3em;
+}
