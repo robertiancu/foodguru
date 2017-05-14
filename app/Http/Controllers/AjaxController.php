@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use TomLingham\Searchy\Facades\Searchy;
+use App\Models\Ingredient;
 
 class AjaxController extends Controller
 {
@@ -45,6 +46,19 @@ class AjaxController extends Controller
             ->getQuery()
             ->limit(10)
             ->get();
+
+        return $results;
+    }
+
+
+    /**
+     * Get all ingredients
+     *
+     * @return Response
+     */
+    public function searchAllIngredients()
+    {
+        $results = Ingredient::select('name')->get();
 
         return $results;
     }
