@@ -96,4 +96,10 @@ class RecipeController extends Controller
         return redirect("/view/recipe/" . (string)$recipe->id);
     }
 
+    public function create()
+    {
+        $sidebar_items = $this->getSidebarMenuItems();
+        return view("views.create.recipe", compact('sidebar_items'));
+    }
+
 }
