@@ -86,7 +86,6 @@
 
                     for(key in data)
                     {
-                        console.log(data[key].name);
 
                         let recipeBox = $('<div/>', { 'class': 'thumbnail col-sm-3 col-md-2' });
                         let recipeImage = $('<img>',{ 'src': data[key].image,
