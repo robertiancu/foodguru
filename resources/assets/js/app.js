@@ -6,12 +6,27 @@
 
 require('./bootstrap');
 
-
 $(document).ready(function() {
 
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+    // Ingredients search ajax hints feature
+    $('#ingredient-search').on('input', function(e) {
+        let search_box = $(this);
+        let word = search_box.val();
+        if (word.length > 0) {
+            $.get('/ajax/searchIngredientHints/' + word)
+                .done(function(words) {
+                    let words_array = words.map(word => word.name);
+                    search_box.autocomplete({
+                        source: words_array
+                    });
+                });
         }
     });
 
@@ -48,4 +63,5 @@ $(document).ready(function() {
     $('#calendar').fullCalendar({
         // put your options and callbacks here
     })
+
 });

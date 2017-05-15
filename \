@@ -16,7 +16,7 @@
 
 @import '~jquery-ui/themes/base/all.css';
 
-//@import "node_modules/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min";
+@import 'node_modules/taggle/example/scss/taggle.scss';
 
 /*
  * Color settings

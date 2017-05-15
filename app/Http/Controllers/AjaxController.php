@@ -48,5 +48,35 @@ class AjaxController extends Controller
 
         return $results;
     }
+
+
+    /**
+     * Return the fridge view
+     *
+     * @return Response
+     */
+    public function ingredientsNames($word)
+    {
+        if (strlen($word) < 1) {
+            return [];
+        }
+
+        $results = Searchy::ingredients('name')
+            ->select('name')
+            ->query($word)
+            ->getQuery()
+            ->limit(10)
+            ->get()
+            ->toArray();
+
+        $func = function($item)
+        {
+            return $item->name;
+        };
+
+        $ingredients = array_map($func,$results);
+
+        return $ingredients;
+    }
 }
 
