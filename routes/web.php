@@ -66,6 +66,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::get('searchIngredientHints/{word}', 'AjaxController@searchIngredientHints');
         Route::get('searchIngredientsNames/{word}', 'AjaxController@ingredientsNames');
         Route::get('getRecipiesForIngredients', 'FridgeController@getRecipiesForIngredients');
+        Route::get('searchAllIngredients', 'AjaxController@searchAllIngredients');
     });
 });
 

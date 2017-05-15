@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use TomLingham\Searchy\Facades\Searchy;
+use App\Models\Ingredient;
 
 class AjaxController extends Controller
 {
@@ -69,14 +70,25 @@ class AjaxController extends Controller
             ->get()
             ->toArray();
 
-        $func = function($item)
-        {
+        $func = function($item) {
             return $item->name;
         };
 
         $ingredients = array_map($func,$results);
 
         return $ingredients;
+    }
+
+    /*
+     * Get all ingredients
+     *
+     * @return Response
+     */
+    public function searchAllIngredients()
+    {
+        $results = Ingredient::select('name')->get();
+
+        return $results;
     }
 }
 

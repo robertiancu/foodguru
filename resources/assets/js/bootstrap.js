@@ -7,10 +7,11 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-import $ from 'jquery';
-window.$ = window.jQuery = $;
+global.$ = global.jQuery = require('jquery');
 import 'jquery-ui/ui/widgets/autocomplete.js';
 import 'fullcalendar';
+
+require('jquery');
 
 require('bootstrap-sass');
 

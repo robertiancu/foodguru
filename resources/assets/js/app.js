@@ -4,9 +4,14 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require('./bootstrap.js');
+
+//import './jQuery1-5-1.js';
+import './jquery-token-input/src/jquery.tokeninput.js';
+import './ingredientTokenInput.js';
 
 $(document).ready(function() {
+    console.log(jQuery);
 
     $.ajaxSetup({
         headers: {
