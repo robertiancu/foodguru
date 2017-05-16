@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Friend;
 use App\Models\FriendRequest;
+use App\Models\Event;
 
 class User extends Authenticatable
 {

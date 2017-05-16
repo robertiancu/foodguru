@@ -14,7 +14,7 @@
                                 <label for="first_name" class="col-md-4 control-label">Prenume</label>
 
                                 <div class="col-md-6">
-                                    <input id="fisrt_name" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" required autofocus>
+                                    <input id="first_name" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" required autofocus>
 
                                     @if ($errors->has('first_name'))
                                         <span class="help-block">

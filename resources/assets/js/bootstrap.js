@@ -11,6 +11,7 @@ import $ from 'jquery';
 window.$ = window.jQuery = $;
 import 'jquery-ui/ui/widgets/autocomplete.js';
 import 'fullcalendar';
+require('bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js');
 
 require('bootstrap-sass');
 
