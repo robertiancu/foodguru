@@ -8,8 +8,12 @@
                     }
                     .saverecipe
                     {
-                        margin-top: 30px;
+                        margin-left: 50px;
                         margin-bottom: 30px;
+                    }
+                    input[type=checkbox]
+                    {
+                        margin-left: 50px;
                     }
                     </style>
                      <script>
@@ -21,7 +25,11 @@
                              plusButtonDiv=document.getElementById("btndiv");
                              SplusButton=document.getElementsByClassName("plus2")[0];
                              SplusButtonDiv=document.getElementById("btndiv2");
-                            }
+
+                             document.getElementById("difficulty").addEventListener("mousemove", function () {
+                                document.getElementById('slider-span').innerHTML = this.value;
+                            });
+                         }
 
                             var plusButton;
                             var plusButtonDiv;
@@ -169,7 +177,7 @@
 
                     <h1 class="page-header">Recipe creator</h1>
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="/recipe/create" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -190,7 +198,7 @@
                             <label for="category" class="col-md-4 control-label">Categorie :   </label>
 
                             <div class="col-md-6">
-                                <input id="category" type="text" class="form-control" name="category" placeholder="Deserts" required>
+                                <input id="category " type="text" class="form-control" name="category" placeholder="Deserts" required>
 
                                 @if ($errors->has('category'))
                                     <span class="help-block">
@@ -208,7 +216,7 @@
 
                                 @if ($errors->has('description'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('category') }}</strong>
+                                        <strong>{{ $errors->first('description') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -218,11 +226,11 @@
                             <label for="image" class="col-md-4 control-label">Imagine :</label>
 
                             <div class="col-md-6">
-                                <input id="image" type="file" class="form-control-file" name="image" accept="image/*" required>
+                                <input id="image" type="file" class="form-control-file" name="image">
 
-                                @if ($errors->has('description'))
+                                @if ($errors->has('image'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('category') }}</strong>
+                                        <strong>{{ $errors->first('image') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -235,7 +243,7 @@
                                 <input id="time" type="number" class="form-control" name="time" required>
                                 @if ($errors->has('time'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('category') }}</strong>
+                                        <strong>{{ $errors->first('time') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -246,11 +254,11 @@
                             <label for="difficulty" class="col-md-4 control-label">Dificultate :</label>
                             <div class="col-md-2"></div>
                             <div id="slider" class="col-md-2">
-                               <input id="difficulty" type="range" class="ange-slider__range" name="difficulty" min="1" max="10" value="5" onchange="changeVal(this.value)" oninput="showVal(this.value)">
+                               <input id="difficulty" type="range" class="ange-slider__range" name="difficulty" min="1" max="10" value="5" onchange="changeVal(this.value)" oninput="showVal(this.value)" >
 
-                                @if ($errors->has('time'))
+                                @if ($errors->has('difficulty'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('category') }}</strong>
+                                        <strong>{{ $errors->first('difficulty') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -320,9 +328,13 @@
 
                             </div>
 
-                            <label class="col-md-4 control-label"></label>
-                            <div class="col-md-3"></div>
-                            <input class="btn btn-primary saverecipe" type="submit" value="Save recipe">
+                            <div class="form-group">
+                            <label class="col-md-4 control-label">Vizibilitate la publicul larg :</label>
+                            <div class="col-md-2">
+                                    <input type="checkbox" class="checkbox-inline" name="public" value="yes" checked> Reteta publica 
+                            </div>
+                            <div class="col-md-2"><input class="btn btn-primary saverecipe" type="submit" value="Salveaza reteta"></div>
+                            </div>
 
                                                 </form>
 

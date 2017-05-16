@@ -45,7 +45,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::get('fridge', 'FridgeController@index');
     });
 
-    Route::post('recipe', 'RecipeController@store');
+    Route::post('recipe/create', 'RecipeController@store');
     Route::post('ingredient', 'RecipeController@store');
     Route::post('circle', 'CircleController@store');
     Route::post('addCalendarEvent', 'CalendarController@addEvent');

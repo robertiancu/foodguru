@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Recipe;
 use App\Models\Category;
+use App\Models\Step;
+use App\Models\Rating;
+use Illuminate\Support\Facades\Input;
+use Auth;
 
 class RecipeController extends Controller
 {
@@ -18,11 +22,14 @@ class RecipeController extends Controller
      */
     public function show($id)
     {
-        $recipe = [];
-
-        $recipe['recipe'] = Recipe::findOrFail($id);
-
-        return view('recipe', compact('recipe'));
+        $sidebar_items = $this->getSidebarMenuItems();
+        $recipe= Recipe::findOrFail($id);
+        $rating= Rating::where('recipe_id',$recipe->id)->avg('rating');
+        $rating = number_format($rating,1);
+        if($rating == 0)
+            $rating="No rating added yet";
+        $steps = Step::where('recipe_id',$recipe->id)->orderBy('step_number')->get();
+        return view('views.show.recipe', compact('sidebar_items','recipe','steps','rating'));
     }
 
     /**
@@ -80,18 +87,40 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = $this->validator($request);
+        // $validator = $this->validator($request);
 
-        if ($validator->fails()) {
-            return redirect('recipe/create')
-                ->withErrors($validator)
-                ->withInput();
-        }
+        // if ($validator->fails()) {
+        //     return redirect('recipe/create')
+        //         ->withErrors($validator)
+        //         ->withInput();
+        // }
 
         $recipe = new Recipe;
-        $recipe->category_id = $request->input('category_id');
+        $recipe->category_id = Category::where('name',$request->input('category'))->first()->id;
         $recipe->name = $request->input('name');
-        $recipe->image = $request->input('name');
+        $file = Input::file('image');
+
+            if($file)
+            {   
+            $filename = Recipe::orderBy('id','desc')->first()->id+1;
+            $extension = $file->getMimeType();
+            $extension = explode("/", $extension)[1];
+            $new_image_name = ((string) $filename) . "." . $extension;
+            $file = $file->move(public_path() . '/images/recipe_images/' , $new_image_name);
+            $image_path = $file->getRealPath();
+            $recipe->image = $image_path;
+            }  
+            else
+                {
+                    $recipe->image = null;
+                    return (Input::file('image'));
+                }
+        $recipe->description = $request->input('description');
+        $recipe->time = $request->input('time');
+        $recipe->difficulty = $request->input('difficulty');
+        $recipe->published = (strcmp($request->input('public'),'yes')==0);
+        $recipe->user_id = Auth::id();
+        $recipe->save();
 
         return redirect("/view/recipe/" . (string)$recipe->id);
     }
