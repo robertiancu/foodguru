@@ -42,7 +42,7 @@
     1px 1px 0 #000;">&nbsp{{ $rating }}</p>
 	</div>
 	<div  style="margin-top:30px; " class="reicpe-details col-md-10">
-		<b><p>Difficulty : <span style="color:rgb({{$recipe->difficulty*255/10}},{{(10-$recipe->difficulty)*255/10}},0)">{{$recipe->difficulty}}</span></p></b>
+		<b><p>Difficulty : <span style="color:rgb({{floor($recipe->difficulty*255/10)}},{{floor((10-$recipe->difficulty)*255/10)}},0)">{{$recipe->difficulty}}</span></p></b>
 		<b>Preparation time: {{ floor($recipe->time/60)}}h {{ $recipe->time%60 }}m </b>
 				<img src="{{URL::asset('/images/recipes/clock.png')}}" style="width:1.5em;margin-left:10px">
 		<br>
