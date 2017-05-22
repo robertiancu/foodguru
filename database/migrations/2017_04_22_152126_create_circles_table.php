@@ -18,7 +18,7 @@ class CreateCirclesTable extends Migration
             $table->string('name');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->boolean('public');
+            $table->boolean('public')->default(false);
             $table->timestamps();
         });
 

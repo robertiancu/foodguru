@@ -48,6 +48,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::post('recipe/{id}', 'RecipeController@store');
     Route::post('ingredient/{id}', 'RecipeController@store');
     Route::post('circle', 'CircleController@store');
+    Route::post('circle/{id}', 'CircleController@update');
+    Route::post('circle/delete/{id}','CircleController@destroy');
     Route::post('addCalendarEvent', 'CalendarController@addEvent');
 
     Route::group(['prefix' => 'image/'], function() {
