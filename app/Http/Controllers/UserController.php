@@ -47,4 +47,28 @@ class UserController extends Controller
         $user->friends()->save($friend);
         $friend->friends()->save($user);
     }
+
+    /**
+     * undocumented function
+     *
+     * @return void
+     */
+    public function searchAllUsers(Request $request)
+    {
+        $word = $request->input('word');
+
+        if (strlen($word) < 1) {
+            return [];
+        }
+
+        $results = Searchy::recipes('first_name, last_name')
+            ->select('first_name' ,'last_name')
+            ->query($word)
+            ->getQuery()
+            ->limit(10)
+            ->get();
+
+        return $results;
+    }
+    
 }

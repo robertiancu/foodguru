@@ -49,8 +49,9 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'location' => $faker->streetAddress,
-        'start_time' => $date_time,
-        'end_time' => (clone $date_time)->add($interval),
+        'day' => $date_time->format('Y-m-d'),
+        'start_time' => $date_time->format('H:i:s'),
+        'end_time' => ((clone $date_time)->add($interval))->format('H:i:s'),
         'user_id' => $faker->numberBetween(1,100)
     ];
 });

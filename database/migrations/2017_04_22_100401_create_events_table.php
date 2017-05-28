@@ -18,8 +18,9 @@ class CreateEventsTable extends Migration
 
             $table->string('name');
             $table->string('location');
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
+            $table->date('day');
+            $table->time('start_time');
+            $table->time('end_time');
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');

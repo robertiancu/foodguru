@@ -32,7 +32,7 @@ class CalendarController extends Controller
     protected function getEventsForThisUser()
     {
         //$user = Auth::user();
-        $user = User::findOrFail(10);
+        $user = User::findOrFail(20);
 
         $events = $user->events;
 
@@ -41,6 +41,7 @@ class CalendarController extends Controller
                 'id' => $event->id,
                 'name' => $event->name,
                 'location' => $event->location,
+                'day' => $event->day,
                 'start_time' => $event->start_time,
                 'end_time' => $event->end_time,
                 'public' => $event->public,
@@ -51,5 +52,29 @@ class CalendarController extends Controller
 
 
         return $events_data;
+    }
+
+    /**
+     * Get json, special parsed for calendar
+     *
+     * @return Response
+     */
+    public function eventsForCalendar()
+    {
+        //$user = Auth::user();
+        $user = User::findOrFail(20);
+
+        $events = $user->events;
+
+        $events = $events->map(function($event) {
+            return [
+                'title' => $event->name,
+                'start' => $event->day . 'T' . $event->start_time,
+                'end' => $event->day . 'T' . $event->end_time,
+                'url' => url('/') . '/view/event/' . (string)$event->id
+            ];
+        });
+
+        return $events;
     }
 }

@@ -7,8 +7,6 @@
 require('./bootstrap.js');
 
 $(document).ready(function() {
-    console.log(jQuery);
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

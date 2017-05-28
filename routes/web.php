@@ -37,7 +37,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::get('favourites', 'FavouriteController@index');
 
         Route::get('calendar', 'CalendarController@index');
+
         Route::get('event/create', 'CalendarController@createEvent');
+        Route::get('event/{id}', 'EventController@show');
 
         Route::get('shopLists', 'ShopListController@index');
         Route::get('shopList/{id}', 'ShopListController@show');
@@ -67,6 +69,13 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::get('searchIngredientsNames/{word}', 'AjaxController@ingredientsNames');
         Route::get('getRecipiesForIngredients', 'FridgeController@getRecipiesForIngredients');
         Route::get('searchAllIngredients', 'AjaxController@searchAllIngredients');
+
+        Route::get('searchAllUsers', 'UserController@searchAllUsers');
+
+        Route::get('eventsForCalendar', 'CalendarController@eventsForCalendar');
+
+        Route::get('getEventUsers/{id}', 'EventController@getUsersForEvent');
+        Route::post('removeUserFromEvent', 'EventController@removeUserFromEvent');
     });
 });
 
