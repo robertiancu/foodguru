@@ -16,38 +16,47 @@ class CircleController extends Controller
     }
 
     public function create(){
-        return view('circles.create');
+        return view('views.circle.create');
     }
 
     public function store(){
-        $this->validate(request(),[
-            'name' => 'required|string|max:50',
-            'public' => 'required|boolean'
-        ]);
+        
+        if(!request('name') || strlen(request('name')) > 50)
+            redirect()->back();
+
+        $name = trim(request('name'));
 
         $circle = new Circle;
         $circle->user_id = auth()->user()->id;
-        $circle->name = request('name');
-        $circle->public = request('public');
+        $circle->name = $name;
 
         $circle->save();
 
-        auth()->user()->circles->attach($circle->id);
+        auth()->user()->circles()->attach($circle->id);
 
         return redirect("/view/circle/{$circle->id}");
     }
 
-    public function show(Circle $circle){
-        if ($circle->public)
-            return view('circles.show',compact('circle'));
+    public function show($id){
+        $circle = Circle::find($id);
 
-        if (in_array($circle->id , auth()->user()->circles->pluck('id')->toArray()))
-            return view('circles.show',compact('circle'));
+        if ($circle && ($circle->public || in_array($circle->id , auth()->user()->circles->pluck('id')->toArray()))){
+            $sidebar_items = $this->getSidebarMenuItems();
+            
+            $users = $circle->users->where('id','<>',auth()->user()->id)->sort(function($u1, $u2){
+                        if(strcmp($u1->first_name, $u2->first_name) != 0)
+                            return strcmp($u1->first_name, $u2->first_name);
+                        else return strcmp($u1->last_name, $u2->last_name);
+                    })->all();
+            return view('views.circle_show',compact('circle','sidebar_items','users'));
+        }
 
-        return view('circles.index');
+        return redirect('/view/circles');
     }
 
     public function search(){
+        $sidebar_items = $this->getSidebarMenuItems();
+
         if(!auth()->check())
             $circles = Circle::where('public',true)->paginate(10);
 
@@ -58,47 +67,90 @@ class CircleController extends Controller
                 })->paginate(10);
         }
 
-        return view('circles.index',compact('circles'));
+        return view('views.circles',compact('circles','sidebar_items'));
     }
 
-    public function update(Circle $circle){
-        if(auth()-user()->id != $circle->user_id)
+    public function update($id){
+        $circle=Circle::find($id);
+        if($circle == null)
+            return redirect('/view/circles');
+
+        if(request('public')){
+            $circle->public = !$circle->public;
+            $circle->save();
+            return redirect("view/circle/{$circle->id}");
+        }
+        if(request('leave_circle')){
+            $circle->users()->detach(request('leave_circle'));
+            $circle->save();
+            return redirect("view/circle/{$circle->id}");
+        }
+ 
+        if(auth()->user()->id != $circle->user_id)
             return redirect("/view/circle/{$circle->id}")
             ->withErrors(['edit' => 'Nu sunteti administratorul cercului!']);
 
-        $this->validate(request(),[
-            'name' => 'nullable|string|max:50',
-            'public' => 'nullable|boolean',
-            'user_id' => [
-                'nullable',
-                Rule::in(User::pluck('id')->toArray()),
-                Rule::notIn($circle->users->pluck('id')->toArray())
-            ]
-        ]);
-
-        if(request('name'))
-            $circle->name=request('name');
+        $message=array();
+        if(request('name')){
+            if (strlen($request('name')) <= 255)
+                $circle->name = request('name');
+            else
+                $message['circle_name'] = 'Nume prea lung!';
+        }
 
         if(request('public'))
-            $circle->public=request('public');
+            $circle->public = !$circle->public;
 
-        if(request('user_id'))
-            $circle->users()->attach(request('user_id'));
+        if(request('user_id')){
+            if(in_array(request('user_id'),$circle->users->pluck('id')->toArray()))
+                $circle->users()->detach(request('user_id'));
+            else
+                $message['delete_user'] = 'Utilizatorul introdus nu este membru!';
+        }
+
+        if(request('username')){
+            if(strlen(request('username'))<=512){
+                $input = trim(request('username'));
+                $names = preg_split("~ ~",$input,NULL,PREG_SPLIT_NO_EMPTY);
+                if (count($names) == 1 && strpos($input,'@'))
+                    $user = User::where('email',$input)->first();
+                else if (count($names) == 2){
+                    $user = User::where(function ($query) use ($names){
+                                $query->where('first_name',$names[0])->where('last_name',$names[1]);
+                                })->orWhere(function ($query) use ($names){
+                                    $query->where('first_name',$names[1])->where('last_name',$names[0]); 
+                                })->first();
+                }
+                else $user = null;
+                if ($user == null)
+                    $message['add_user'] = 'Identificator invalid!';
+                
+                else if(in_array($user->id,$circle->users->pluck('id')->toArray()))
+                    $message['add_user'] = 'Utilizatorul introdus este deja membru!';
+                else
+                    $circle->users()->attach($user->id);
+            }
+            else
+                $message['add_user'] = 'Identificator invalid!';
+        }
 
         $circle->save();
 
-        return redirect("/view/circle/{$circle->id}");
+        return redirect("/view/circle/{$circle->id}")->withErrors($message);
     }
 
-    public function destroy(Circle $circle){
+    public function destroy($id){
+        $circle = Circle::find($id);
+        if($circle == null)
+            return redirect('/view/circles');
         if (auth()->user()->id != $circle->user_id)
             return redirect("/view/circle/{$circle->id}")
-            ->withErrors(['delete' => 'Nu sunteti administratorul cercului!']);
+            ->withErrors(['delete_circle' => 'Nu sunteti administratorul cercului!']);
 
         $circle->users()->detach();
         $circle->delete();
 
-        return view('circles.index');
+        return redirect('/view/circles');
     }
 
 }
