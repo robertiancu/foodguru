@@ -48,6 +48,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     });
 
     Route::post('recipe', 'RecipeController@store');
+    Route::post('recipe/create', 'RecipeController@store');
+    Route::post('rating/create' , 'RatingController@store');
     Route::post('ingredient', 'RecipeController@store');
     Route::post('circle', 'CircleController@store');
     Route::post('circle/{id}', 'CircleController@update');

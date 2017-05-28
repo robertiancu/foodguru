@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Rating;
+use Auth;
+use Illuminate\Support\Facades\Input;
 
 class RatingController extends Controller
 {
@@ -58,30 +60,56 @@ class RatingController extends Controller
      *
      * @return Response
      */
-     public function store()
+     public function store(Request $request)
     {
-        $rules = array(
+        // $rules = array(
 
-        	'user_id'	=> 'required|numeric',
-        	'recipe_id'	=> 'required|numeric',
-            'rating' => 'required|numeric',
-        );
+        // 	'user_id'	=> 'required|numeric',
+        // 	'recipe_id'	=> 'required|numeric',
+        //     'rating' => 'required|numeric',
+        // );
 
-        $validator = Validator::make(Input::all(), $rules);
+        // $validator = Validator::make(Input::all(), $rules);
 
-        if ($validator->fails()) {
-            return Redirect::to('ratings/create')
-                ->withErrors($validator)
-                ->withInput();
-        } else {
+        // if ($validator->fails()) {
+        //     return Redirect::to('ratings/create')
+        //         ->withErrors($validator)
+        //         ->withInput();
+        // } else {
             $rating = new Rating;
-            $rating->user_id       = Auth::user();
-            $rating->recipe_id     = Input::get('recipe_id');
-            $rating->rating        = Input::get('rating');
+            $rating->user_id       = Auth::id();
+            $rating->recipe_id     = $request->input('recipe_id');
+            $rating->rating = 0;
+
+            $ratingValues = [1,2,3,4,5];
+
+            foreach($ratingValues as $value)
+            {
+                if($request->input('rating')==(string)$value)
+                {
+                    $rating->rating = $value;
+                    break;
+                }
+
+            }
+
+            $rat = Rating::where([['user_id','=',Auth::id()],['recipe_id','=',$rating->recipe_id]])->first();
+
+            if($rat != null)
+            {
+                $val = $rating->rating;
+                $rating = $rat;
+                $rating->rating = $val;
+
+                if($rating->rating == 0 )
+                    $rating->delete();
+            }
+
+            if($rating->rating > 0)
             $rating->save();
 
-            return Redirect::to('ratings');
-        }
+            return redirect("/view/recipe/" . (string)$rating->recipe_id);
+        // }
     }
 
      /**

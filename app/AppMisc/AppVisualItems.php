@@ -50,12 +50,12 @@ class AppVisualItems
             [
                 'name' =>'Adauga Reteta',
                 'image' => 'add_recipe.png',
-                'route' => 'view/addRecipe'
+                'route' => 'view/recipe/create'
             ],
             [
                 'name' =>'Adauga Ingredient',
                 'image' => 'add_ingredient.png',
-                'route' => 'view/addIngredient'
+                'route' => 'view/ingredient/create'
             ]
         ];
     }
