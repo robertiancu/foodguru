@@ -69,6 +69,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
     Route::group(['prefix' => 'ajax/'], function() {
         Route::get('searchRecipeHints/{word}', 'AjaxController@searchRecipeHints');
+        Route::get('searchCategoryHints','AjaxController@searchCategoryHints');
         Route::get('searchIngredientHints/{word}', 'AjaxController@searchIngredientHints');
         Route::get('searchIngredientsNames/{word}', 'AjaxController@ingredientsNames');
         Route::get('getRecipiesForIngredients', 'FridgeController@getRecipiesForIngredients');

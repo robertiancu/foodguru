@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+
 	<style type="text/css">
 		* {
   box-sizing: border-box;

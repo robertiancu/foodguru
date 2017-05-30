@@ -16,164 +16,6 @@
                         margin-left: 50px;
                     }
                     </style>
-                     <script>
-                            // Nu stiu cum functioneaza laravel cu js asa ca o sa las scriptul aici
-                            window.onload=function()
-                            {
-                            plusButton=document.getElementsByClassName("plus")[0];
-                             minusButton=document.getElementsByClassName("minus")[0];
-                             plusButtonDiv=document.getElementById("btndiv");
-                             SplusButton=document.getElementsByClassName("plus2")[0];
-                             SplusButtonDiv=document.getElementById("btndiv2");
-
-                             document.getElementById("difficulty").addEventListener("mousemove", function () {
-                                document.getElementById('slider-span').innerHTML = this.value;
-                            });
-                         }
-
-                            var plusButton;
-                            var plusButtonDiv;
-                            var minusButton;
-
-                            function changeVal(value)
-                            {
-                                document.getElementById("slider-span").innerHTML=value;
-                            }
-
-                            function fetchToNum(ingredient,num)
-                            {
-                                goodIngredient = ingredient.cloneNode(true);
-                            
-
-                                num++;
-
-                                label = goodIngredient.getElementsByClassName("control-label")[0];
-                                label.setAttribute("for","ingredient"+num);
-                                label.innerHTML="Ingredient "+num+" :";
-
-
-                                names = goodIngredient.getElementsByClassName("ingredient-name")[0];
-                                names.id="ingredient-name-"+num;
-                                names.name="name-"+num;
-                                names.value="";
-
-
-                                quantity = goodIngredient.getElementsByClassName("ingredient-quantity")[0];
-                                quantity.id="ingredient-quantity-"+num;
-                                quantity.name="quantity-"+num;
-                                quantity.value="";
-
-
-                                description = goodIngredient.getElementsByClassName("ingredient-description")[0];
-                                description.id="ingredient-description-"+num;
-                                description.name="description-"+num;
-                                description.value="";
-
-
-                                delet = goodIngredient.getElementsByClassName("minus")[0];
-                                delet.onclick=function(){removeIngredientForm(num-1);};
-
-
-                                return goodIngredient;
-
-                            }
-                            function addNewIngredientForm()
-                            {
-                                ingredientsDiv = document.getElementById("ingredients-form-div");
-                                ingredientForms = ingredientsDiv.getElementsByClassName("ingredient");
-
-                                count = ingredientForms.length;
-                                newForm = ingredientForms[count-1].cloneNode(true);
-                                newForm = fetchToNum(newForm,count);
-
-                                ingredientsDiv.insertBefore(newForm,plusButtonDiv);
-
-                            }
-
-                            function removeIngredientForm(num)
-                            {
-                                if(num==0)
-                                    return;
-                                 ingredientsDiv = document.getElementById("ingredients-form-div");
-                                ingredientForms = ingredientsDiv.getElementsByClassName("ingredient");
-
-
-                                for(i=num;i<ingredientForms.length;i++)
-                                {
-                                    formOriginal = ingredientForms[i].cloneNode(true);
-
-                                    namesz = String(formOriginal.getElementsByClassName("ingredient-name")[0].value);
-                                    quantityz = String(formOriginal.getElementsByClassName("ingredient-quantity")[0].value);
-                                    descriptionz = String(formOriginal.getElementsByClassName("ingredient-description")[0].value);
-
-                                    formz = fetchToNum(formOriginal,i-1);
-
-                                    formz.getElementsByClassName("ingredient-name")[0].value=namesz;
-                                    formz.getElementsByClassName("ingredient-quantity")[0].value=quantityz;
-                                    formz.getElementsByClassName("ingredient-description")[0].value=descriptionz;
-
-                                    ingredientsDiv.replaceChild(formz,ingredientForms[i]);
-                                }
-
-                                ingredientsDiv.removeChild(ingredientForms[num]);
-
-                     
-
-                            }
-
-                                       function addNewStepForm()
-                            {   
-                                stepsDiv = document.getElementById("steps-form-div");
-                                stepForms = stepsDiv.getElementsByClassName("step");
-                                count = stepForms.length;
-                                newForm = stepForms[count-1].cloneNode(true);
-
-                                newForm = stepFetchToNum(newForm,count);
-                                stepsDiv.insertBefore(newForm,SplusButtonDiv);
-
-                            }
-
-                            function stepFetchToNum(step,num)
-                            {
-                                goodStep = step.cloneNode(true);
-                                num++;
-                                goodStep.getElementsByTagName("label")[0].for="step"+num;
-                                goodStep.getElementsByTagName("label")[0].innerHTML="Pasul "+num+" :";
-                                goodStep.getElementsByClassName("step-input")[0].name="step-"+num;
-                                goodStep.getElementsByClassName("step-input")[0].id="step-"+num;
-                                goodStep.getElementsByClassName("step-input")[0].value="";
-
-                                goodStep.getElementsByClassName("minus-step")[0].onclick=
-                                function(){
-                                    removeStepAt(num-1);
-                                }
-                                return goodStep;
-                            }
-
-                            function removeStepAt(num)
-                            {
-                                if(num==0)
-                                    return;
-
-                                stepsDiv = document.getElementById("steps-form-div");
-                                stepForms = stepsDiv.getElementsByClassName("step");
-
-
-                                for(i=num;i<stepForms.length;i++)
-                                {
-                                    formOriginal = stepForms[i].cloneNode(true);
-                                    valuez = String(formOriginal.getElementsByClassName("step-input")[0].value);
-                                
-
-                                    formz = stepFetchToNum(formOriginal,i-1);
-                                    formz.getElementsByClassName("step-input")[0].value=valuez;
-                                    stepsDiv.replaceChild(formz,stepForms[i]);
-                                }
-
-                                stepsDiv.removeChild(stepForms[num]);
-
-                            }
-                        </script>
 
                     <h1 class="page-header">Recipe creator</h1>
 
@@ -198,7 +40,7 @@
                             <label for="category" class="col-md-4 control-label">Categorie :   </label>
 
                             <div class="col-md-6">
-                                <input id="category " type="text" class="form-control" name="category" placeholder="Deserts" required>
+                                <input id="category" type="text" class="form-control" name="category" placeholder="Deserts" required>
 
                                 @if ($errors->has('category'))
                                     <span class="help-block">
@@ -337,5 +179,225 @@
                             </div>
 
                                                 </form>
+@endsection
 
+@section('scripts')
+     <script>
+                        // Nu stiu cum functioneaza laravel cu js asa ca o sa las scriptul aici
+                        window.onload=function()
+                        {
+                        plusButton=document.getElementsByClassName("plus")[0];
+                         minusButton=document.getElementsByClassName("minus")[0];
+                         plusButtonDiv=document.getElementById("btndiv");
+                         SplusButton=document.getElementsByClassName("plus2")[0];
+                         SplusButtonDiv=document.getElementById("btndiv2");
+
+                         document.getElementById("difficulty").addEventListener("mousemove", function () {
+                            document.getElementById('slider-span').innerHTML = this.value;
+                        });
+                     }
+
+                        var plusButton;
+                        var plusButtonDiv;
+                        var minusButton;
+
+                        function changeVal(value)
+                        {
+                            document.getElementById("slider-span").innerHTML=value;
+                        }
+
+                        function fetchToNum(ingredient,num)
+                        {
+                            goodIngredient = ingredient.cloneNode(true);
+                        
+
+                            num++;
+
+                            label = goodIngredient.getElementsByClassName("control-label")[0];
+                            label.setAttribute("for","ingredient"+num);
+                            label.innerHTML="Ingredient "+num+" :";
+
+
+                            names = goodIngredient.getElementsByClassName("ingredient-name")[0];
+                            var id_name = "ingredient-name-"+num;
+                            names.id=id_name;
+                            names.name="name-"+num;
+                            names.value="";
+
+
+                            quantity = goodIngredient.getElementsByClassName("ingredient-quantity")[0];
+                            quantity.id="ingredient-quantity-"+num;
+                            quantity.name="quantity-"+num;
+                            quantity.value="";
+
+
+                            description = goodIngredient.getElementsByClassName("ingredient-description")[0];
+                            description.id="ingredient-description-"+num;
+                            description.name="description-"+num;
+                            description.value="";
+
+
+                            delet = goodIngredient.getElementsByClassName("minus")[0];
+                            delet.onclick=function(){removeIngredientForm(num-1);};
+
+
+
+                            return goodIngredient;
+
+                        }
+                        function addNewIngredientForm()
+                        {
+                            ingredientsDiv = document.getElementById("ingredients-form-div");
+                            ingredientForms = ingredientsDiv.getElementsByClassName("ingredient");
+
+                            count = ingredientForms.length;
+                            newForm = ingredientForms[count-1].cloneNode(true);
+                            newForm = fetchToNum(newForm,count);
+
+                            ingredientsDiv.insertBefore(newForm,plusButtonDiv);
+
+                             $('#ingredient-name-'+(count+1)).on('input', function(e) {
+                                let search_box = $(this);
+                                let word = search_box.val();
+                                if (word.length > 0) {
+                                    $.get('/ajax/searchIngredientHints/' + word)
+                                        .done(function(words) {
+                                            let words_array = words.map(word => word.name);
+                                            search_box.autocomplete({
+                                                source: words_array
+                                            });
+                                        });
+                                }
+                            });
+                        }
+
+                        function removeIngredientForm(num)
+                        {
+                            if(num==0)
+                                return;
+                             ingredientsDiv = document.getElementById("ingredients-form-div");
+                            ingredientForms = ingredientsDiv.getElementsByClassName("ingredient");
+
+
+                            for(i=num;i<ingredientForms.length;i++)
+                            {
+                                formOriginal = ingredientForms[i].cloneNode(true);
+
+                                namesz = String(formOriginal.getElementsByClassName("ingredient-name")[0].value);
+                                quantityz = String(formOriginal.getElementsByClassName("ingredient-quantity")[0].value);
+                                descriptionz = String(formOriginal.getElementsByClassName("ingredient-description")[0].value);
+
+                                formz = fetchToNum(formOriginal,i-1);
+
+
+                                formz.getElementsByClassName("ingredient-name")[0].value=namesz;
+                                formz.getElementsByClassName("ingredient-quantity")[0].value=quantityz;
+                                formz.getElementsByClassName("ingredient-description")[0].value=descriptionz;
+
+                                ingredientsDiv.replaceChild(formz,ingredientForms[i]);
+
+                                $('#ingredient-name-'+i).on('input', function(e) {
+                                    let search_box = $(this);
+                                    let word = search_box.val();
+                                    if (word.length > 0) {
+                                        $.get('/ajax/searchIngredientHints/' + word)
+                                            .done(function(words) {
+                                                let words_array = words.map(word => word.name);
+                                                search_box.autocomplete({
+                                                    source: words_array
+                                                });
+                                            });
+                                    }
+                                });
+
+                            }
+
+                            ingredientsDiv.removeChild(ingredientForms[num]);
+
+                 
+
+                        }
+
+                        function addNewStepForm()
+                        {   
+                            stepsDiv = document.getElementById("steps-form-div");
+                            stepForms = stepsDiv.getElementsByClassName("step");
+                            count = stepForms.length;
+                            newForm = stepForms[count-1].cloneNode(true);
+
+                            newForm = stepFetchToNum(newForm,count);
+                            stepsDiv.insertBefore(newForm,SplusButtonDiv); 
+
+                        }
+
+                        function stepFetchToNum(step,num)
+                        {
+                            goodStep = step.cloneNode(true);
+                            num++;
+                            goodStep.getElementsByTagName("label")[0].for="step"+num;
+                            goodStep.getElementsByTagName("label")[0].innerHTML="Pasul "+num+" :";
+                            goodStep.getElementsByClassName("step-input")[0].name="step-"+num;
+                            goodStep.getElementsByClassName("step-input")[0].id="step-"+num;
+                            goodStep.getElementsByClassName("step-input")[0].value="";
+
+                            goodStep.getElementsByClassName("minus-step")[0].onclick=
+                            function(){
+                                removeStepAt(num-1);
+                            }
+                            return goodStep;
+                        }
+
+                        function removeStepAt(num)
+                        {
+                            if(num==0)
+                                return;
+
+                            stepsDiv = document.getElementById("steps-form-div");
+                            stepForms = stepsDiv.getElementsByClassName("step");
+
+
+                            for(i=num;i<stepForms.length;i++)
+                            {
+                                formOriginal = stepForms[i].cloneNode(true);
+                                valuez = String(formOriginal.getElementsByClassName("step-input")[0].value);
+                            
+
+                                formz = stepFetchToNum(formOriginal,i-1);
+                                formz.getElementsByClassName("step-input")[0].value=valuez;
+                                stepsDiv.replaceChild(formz,stepForms[i]);
+                            }
+
+                            stepsDiv.removeChild(stepForms[num]);
+
+                        }
+                    </script>
+<script>
+// Ingredients search ajax hints feature
+$('#ingredient-name-1').on('input', function(e) {
+    let search_box = $(this);
+    let word = search_box.val();
+    if (word.length > 0) {
+        $.get('/ajax/searchIngredientHints/' + word)
+            .done(function(words) {
+                let words_array = words.map(word => word.name);
+                search_box.autocomplete({
+                    source: words_array
+                });
+            });
+    }
+});
+$('#category').on('input', function(e) {
+    let search_box = $(this);
+    let word = search_box.val();
+    if (word.length > 0) {
+        $.get('/ajax/searchCategoryHints/', {search_argument: word})
+            .done(function(words) {
+                let words_array = words.map(word => word.name);
+                search_box.autocomplete({
+                    source: words_array
+                });
+            });
+    }
+});
+</script>
 @endsection
