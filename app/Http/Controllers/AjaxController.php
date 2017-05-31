@@ -50,6 +50,28 @@ class AjaxController extends Controller
         return $results;
     }
 
+        /**
+     * Get ingredients for partial words
+     *
+     * @return Response
+     */
+    public function searchCategoryHints(Request $request)
+    {
+        $word = $request->input('search_argument');
+        if (strlen($word) < 1) {
+            return [];
+        }
+
+        $results = Searchy::categories('name')
+            ->select('name')
+            ->query($word)
+            ->getQuery()
+            ->limit(10)
+            ->get();
+
+        return $results;
+    }
+
 
     /**
      * Return the fridge view

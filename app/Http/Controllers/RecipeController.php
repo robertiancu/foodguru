@@ -26,6 +26,8 @@ class RecipeController extends Controller
     {
         $sidebar_items = $this->getSidebarMenuItems();
         $recipe= Recipe::findOrFail($id);
+        if($recipe->image == null)
+            $recipe->image = '/images/recipe_images/placeholder.jpg';
         $rating = [];
         $rating['myRating'] = Rating::where('recipe_id',$recipe->id)->where('user_id',Auth::id())->first();
         
@@ -177,8 +179,7 @@ class RecipeController extends Controller
             }  
             else
                 {
-                    $recipe->image = null;
-                    return (Input::file('image'));
+                    $recipe->image = '/images/recipe_images/placeholder.jpg' ;
                 }
         $recipe->description = $request->input('description');
         $recipe->time = $request->input('time');
