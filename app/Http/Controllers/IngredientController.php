@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use App\Models\Ingredient;
 use App\Models\Misc\IngredientMeta;
 
@@ -27,7 +28,8 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        return 'Form for creating ingredient';
+        $sidebar_items = $this->getSidebarMenuItems();
+        return view("views.create.ingredient", compact('sidebar_items'));
     }
 
     /**
@@ -35,50 +37,24 @@ class IngredientController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        $rules = array(
-            'name'       => 'required',
-            'description' => 'required',
-            'unit' => 'required',
-            'class' => 'required|numeric',
-            'proteins' => 'required|numeric',
-            'carbohydrates' => 'required|numeric',
-            'fats' => 'required|numeric',
-            'calories' => 'required|numeric',
-            'fibers' => 'required|numeric',
-        );
+        $ingredient = new Ingredient;
+        $ingredient->name        = $request->name;
+        $ingredient->description = $request->description;
+        $ingredient->unit        = $request->unit;
+        $ingredient->class       = 2;
+        $ingredient->user_id     = \Auth::id();
+        $ingredient->published   = 0;
 
-        $validator = Validator::make(Input::all(), $rules);
+        $ingredient->calories    = $request->calories;
+        $ingredient->proteins    = $request->proteins;
+        $ingredient->lipids      = $request->fats;
+        $ingredient->carbs       = $request->carbs;
+        $ingredient->fibers      = $request->fibers;
+        $ingredient->save();
 
-        if ($validator->fails()) {
-            return Redirect::to('ingredients/create')
-                ->withErrors($validator)
-                ->withInput();
-        } else {
-            $ingredient = new Ingredient;
-            $ingredient->name        = Input::get('name');
-            $ingredient->description = Input::get('description');
-            $ingredient->unit        = Input::get('unit');
-            $ingredient->class       = Input::get('class');
-            $ingredient->save();
-
-            $metaElements['Calorii'] = "calories";
-            $metaElements['Proteine'] = "proteins";
-            $metaElements['Lipide'] = "fats";
-            $metaElements['Carbohidrati'] = "carbohydrates";
-            $metaElements['Fibre'] = "fibers";
-
-            foreach($metaElements as $key => $meta) {
-                $ingredientMeta = new IngredientMeta;
-                $ingredientMeta->ingredient_id = $ingredient->id();
-                $ingredientMeta->key           = $key;
-                $ingredientMeta->value         = Input::get($meta);
-                $ingredientMeta->save();
-            }
-
-            return Redirect::to('ingredients');
-        }
+        return Redirect::to('view/home');
     }
 
     /**

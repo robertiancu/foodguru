@@ -215,4 +215,12 @@ class RecipeController extends Controller
         return view("views.create.recipe", compact('sidebar_items'));
     }
 
+
+    public function getRecipies(Request $request)
+    {
+        $recipes =  Recipe::orderBy('created_at','desc')->limit(9)
+                            ->offset($request->i * 9)->get();
+        return $recipes;
+    }
+
 }

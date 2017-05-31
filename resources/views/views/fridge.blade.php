@@ -87,19 +87,37 @@
                     for(key in data)
                     {
 
-                        let recipeBox = $('<div/>', { 'class': 'thumbnail col-sm-3 col-md-2' });
+                        let recipeBox = $('<div/>', { 'class': 'col-md-3 col-sm-3 col-xs-4 column productbox' });
                         let recipeImage = $('<img>',{ 'src': data[key].image,
-                                                       'alt': data[key].name});
-                        let recipeCaption = $('<div/>',{ 'class': 'caption' });
-                        let recipeName = $('<h3/>');
+                                                      'alt': data[key].name,
+                                                      'class': 'img-responsive'});
 
-                        recipeName.append(data[key].name);
+                        let recipeCaption = $('<div/>',{ 'class': 'producttitle' });
+
+                        let recipeDetails = $('<div/>',{'class': 'productprice' });
+                        let recipeRightDetails = $('<div/>',{'class': 'pull-right' });
+                        let recipeLink = $('<div/>',{'class': 'btn btn-danger btn-sm' });
+                        let recipeLinkA = $('<a/>',{'class': 'btn btn-danger btn-sm',
+                            'role': 'button',
+                            'href':'/view/recipe/' + data[key].id
+                        });
+                        let recipeReview = $('<div/>',{'class': 'pricetext'});
 
                         recipeBox.appendTo('#recipes');
 
                         recipeImage.appendTo(recipeBox);
                         recipeCaption.appendTo(recipeBox);
-                        recipeName.appendTo(recipeCaption);
+                        recipeDetails.appendTo(recipeBox);
+
+                        recipeRightDetails.appendTo(recipeDetails);
+                        recipeLink.appendTo(recipeRightDetails);
+                        recipeLinkA.appendTo(recipeLink);
+                        recipeReview.appendTo(recipeDetails);
+
+                        recipeLinkA.text("See");
+                        recipeCaption.text(data[key].name);
+                        recipeReview.text("Dificultate: " + data[key].difficulty +"/10");
+
                     }
 
                 });

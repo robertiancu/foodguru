@@ -26,9 +26,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::get('recipe/create', 'RecipeController@create');
         Route::get('recipe/{id}', 'RecipeController@show');
 
-        Route::get('ingredients', 'RecipeController@index');
-        Route::get('ingredient/create', 'RecipeController@create');
-        Route::get('ingredient/{id}', 'RecipeController@show');
+        Route::get('ingredients', 'IngredientController@index');
+        Route::get('ingredient/create', 'IngredientController@create');
+        Route::get('ingredient/{id}', 'IngredientController@show');
 
         Route::get('circles', 'CircleController@index');
         Route::get('circle/create', 'CircleController@create');
@@ -50,7 +50,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::post('recipe', 'RecipeController@store');
     Route::post('recipe/create', 'RecipeController@store');
     Route::post('rating/create' , 'RatingController@store');
-    Route::post('ingredient', 'RecipeController@store');
+    Route::post('ingredient/create', 'IngredientController@store');
     Route::post('circle', 'CircleController@store');
     Route::post('circle/{id}', 'CircleController@update');
     Route::post('circle/delete/{id}','CircleController@destroy');
@@ -72,6 +72,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::get('searchIngredientHints/{word}', 'AjaxController@searchIngredientHints');
         Route::get('searchIngredientsNames/{word}', 'AjaxController@ingredientsNames');
         Route::get('getRecipiesForIngredients', 'FridgeController@getRecipiesForIngredients');
+        Route::get('getRecipies', 'RecipeController@getRecipies');
         Route::get('searchAllIngredients', 'AjaxController@searchAllIngredients');
 
         Route::get('searchAllUsers', 'UserController@searchAllUsers');
