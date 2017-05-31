@@ -34,7 +34,7 @@ $(document).ready(function() {
         let search_box = $(this);
         let word = search_box.val();
         if (word.length > 0) {
-            $.get('/ajax/searchIngredientHints/' + word)
+            $.get('/ajax/searchRecipeHints/' + word)
                 .done(function(words) {
                     let words_array = words.map(word => word.name);
                     search_box.autocomplete({
@@ -43,6 +43,23 @@ $(document).ready(function() {
                 });
         }
     });
+
+    //$('#sidebar-recipe-search').bind("enterKey",function(e){
+    $('#sidebar-recipe-search').keypress(function(e) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+                console.log('cacat');
+            //alert('You pressed a "enter" key in textbox');  
+            $.get('/ajax/recipe/exists', {name: $(this).val()}).done(function(data) {
+                for (const prop of data) {
+                    if(prop) {
+                        window.location.replace('/view/recipe/' + prop.id);
+                    }
+                }
+            });
+        }
+    });
+
 
     $('#navbar-recipe-search').on('input', function(e) {
         let search_box = $(this);

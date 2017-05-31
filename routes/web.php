@@ -80,6 +80,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
         Route::get('getEventUsers/{id}', 'EventController@getUsersForEvent');
         Route::post('removeUserFromEvent', 'EventController@removeUserFromEvent');
+        Route::get('recipe/exists', 'RecipeController@exists');
     });
 });
 

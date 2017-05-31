@@ -84,6 +84,20 @@ class RecipeController extends Controller
     }
 
     /**
+     * Return the view with associated data for a recipe.
+     *
+     * @throws ModelNotFound
+     * @return Response
+     */
+    public function exists(Request $request)
+    {
+        $name = $request->input('name');
+        $recipe= Recipe::where('name', $name)->get();
+
+        return $recipe;
+    }
+
+    /**
      * Returns recipies by tags like most recent and also returns
      * categories
      *
