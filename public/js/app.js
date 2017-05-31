@@ -28020,13 +28020,50 @@ $(document).ready(function () {
         var search_box = $(this);
         var word = search_box.val();
         if (word.length > 0) {
-            $.get('/ajax/searchIngredientHints/' + word).done(function (words) {
+            $.get('/ajax/searchRecipeHints/' + word).done(function (words) {
                 var words_array = words.map(function (word) {
                     return word.name;
                 });
                 search_box.autocomplete({
                     source: words_array
                 });
+            });
+        }
+    });
+
+    //$('#sidebar-recipe-search').bind("enterKey",function(e){
+    $('#sidebar-recipe-search').keypress(function (e) {
+        var keycode = event.keyCode ? event.keyCode : event.which;
+        if (keycode == '13') {
+            console.log('cacat');
+            //alert('You pressed a "enter" key in textbox');  
+            $.get('/ajax/recipe/exists', { name: $(this).val() }).done(function (data) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var prop = _step.value;
+
+                        if (prop) {
+                            window.location.replace('/view/recipe/' + prop.id);
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
             });
         }
     });
@@ -67191,10 +67228,6 @@ process.off = noop;
 process.removeListener = noop;
 process.removeAllListeners = noop;
 process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');

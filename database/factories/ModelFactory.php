@@ -121,7 +121,7 @@ $factory->define(App\Models\Recipe::class, function (Faker\Generator $faker) {
     return [
         'category_id' => $faker->numberBetween(1, 10),
         'name' => $faker->words($nb = 3, $asText = true),
-        'image' => $faker->boolean ? $faker->imageUrl(640,480,'food') : null,
+        'image' => $faker->imageUrl(640,480,'food'),
         'description' => $faker->text,
         'time' => $faker->numberBetween(15,200),
         'difficulty' => $faker->numberBetween(1,10),
